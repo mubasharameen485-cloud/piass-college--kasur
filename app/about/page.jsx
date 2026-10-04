@@ -110,14 +110,14 @@ export default function AboutPage() {
       title: "Advanced Computer Science & IT Lab",
       category: "Computing & Software",
       desc: "Fully air-conditioned computer laboratory with branded Core i7 workstations, high-speed fiber internet, Linux/Windows environments, and projection monitors for coding sessions.",
-      image: "/images/19.avif",
+      image: "/images/24.webp",
       points: ["Dedicated Individual Workstations", "High-Speed Fiber Connectivity", "Modern Software Development IDEs"]
     },
     {
       title: "Anatomy, Physiology & Science Demonstration Lab",
       category: "Foundational Medical Sciences",
       desc: "Spacious laboratory featuring detailed skeletal models, human organ charts, histological microscopes, and chemical reagents for practical bio-science experiments.",
-      image: "/images/19.avif",
+      image: "/images/25.webp",
       points: ["Complete Human Skeleton & Organ Models", "High-Resolution Microscopes", "Hands-on Dissection Displays"]
     }
   ];
