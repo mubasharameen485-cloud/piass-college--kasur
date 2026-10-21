@@ -55,10 +55,10 @@ export default function Navbar() {
             </div>
             <div className="flex flex-col">
               <span className="text-xl sm:text-2xl font-black tracking-tight text-[#0B1B4F] leading-none">
-                PIASS <span className="text-[#0D7A68]">COLLEGE</span>
+                PIASS <span className="text-[#0D7A68]">COLLEGE OF NURSING </span>
               </span>
               <span className="text-xs font-semibold text-slate-600 tracking-wider uppercase mt-1">
-                of Nursing & Sciences • Kasur
+                 
               </span>
             </div>
           </Link>
