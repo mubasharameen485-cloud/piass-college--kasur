@@ -42,7 +42,7 @@ export default function Footer() {
                   PIASS <span className="text-[#0D7A68]">COLLEGE</span>
                 </span>
                 <span className="text-xs font-semibold text-teal-400 tracking-wider uppercase mt-1">
-                  of Nursing & Sciences • Kasur
+                  of Nursing  • Kasur
                 </span>
               </div>
             </Link>
@@ -259,7 +259,7 @@ export default function Footer() {
       <div className="bg-[#030817] text-[11px] text-slate-500 py-4 border-t border-blue-950/60">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left">
           <p>
-            © {new Date().getFullYear()} PIASS College of Nursing & Sciences, Kasur. All Rights Reserved.
+            © {new Date().getFullYear()} PIASS College of Nursing , Kasur. All Rights Reserved.
           </p>
           <p className="text-slate-400">
             Admissions Session 2026 • Main Ferozpur Road, Kasur

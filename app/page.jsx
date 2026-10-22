@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import WelcomeVideoSection from "@/components/home/WelcomeVideoSection";
+import StudentVoices from "@/components/home/StudentVoices";
 import { 
   Sparkles, 
   ArrowRight, 
@@ -163,6 +165,15 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+
+
+<WelcomeVideoSection />
+
+
+
+
+
 
       {/* 4. EXECUTIVE DIRECTOR & PRINCIPAL COMMITMENT SPOTLIGHT */}
       <section className="py-20 sm:py-24 bg-white overflow-hidden">
@@ -720,6 +731,15 @@ export default function HomePage() {
 
         </div>
       </section>
+
+
+
+
+<StudentVoices />
+
+
+
+
 
       {/* 11. KASUR ADMISSIONS DESK & CTA PIN */}
       <section className="bg-gradient-to-r from-[#071233] to-[#0B1B4F] text-white py-16 border-t-4 border-[#0D7A68]">
