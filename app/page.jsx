@@ -31,7 +31,7 @@ import { collegeInfo } from "@/data/affiliationsData";
 export default function HomePage() {
   const [openFaq, setOpenFaq] = useState(0);
 
-  // 1. SIRF 3 BALANCED FACULTY OVERVIEW BOXES (Poster ke mutabiq)
+  
   const academicWings = [
     {
       id: "nursing-health",
@@ -178,7 +178,7 @@ export default function HomePage() {
                   {/* Portrait Frame */}
                   <div className="relative h-[440px] sm:h-[490px] w-full rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
                     <Image
-                      src="/images/17.avif"
+                      src="/images/ceo2.jpeg"
                       alt="PIASS Academic Leadership"
                       fill
                       className="object-cover object-top"

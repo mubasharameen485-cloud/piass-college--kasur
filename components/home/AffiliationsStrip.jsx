@@ -1,62 +1,125 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
-import { ShieldCheck } from "lucide-react";
-import { affiliationsData } from "../../data/affiliationsData";
 
 export default function AffiliationsStrip() {
-  return (
-    <section id="affiliations" className="bg-slate-50 border-y border-slate-200 py-10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Section Header */}
-        <div className="flex flex-col sm:flex-row items-center justify-between pb-6 mb-6 border-b border-slate-200 gap-3">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-[#0D7A68]/10 text-[#0D7A68] flex items-center justify-center">
-              <ShieldCheck className="w-5 h-5" />
-            </div>
-            <div>
-              <h2 className="text-base sm:text-lg font-bold text-[#0B1B4F]">
-                Recognized & Approved Affiliations
-              </h2>
-              <p className="text-xs text-slate-500">
-                Degrees & Diplomas accredited by national and provincial regulatory councils
-              </p>
-            </div>
-          </div>
-          <span className="text-xs font-semibold px-3 py-1 bg-white border border-slate-200 rounded-full text-slate-600 shadow-sm">
-            Government Certified Campus
-          </span>
-        </div>
+  
+  const affiliations = [
+    {
+      name: "PNMC Islamabad",
+      title: "Pakistan Nursing & Midwifery Council",
+      image: "/logos/pnmc-logo.jpeg",
+      fallback: "/logos/pnmc-logo.png"
+    },
+    {
+      name: "NEBP Lahore",
+      title: "Nursing Examination Board Punjab",
+      image: "/logos/nebp-logo.jpeg",
+      fallback: "/logos/nebp-logo.png"
+    },
+    {
+      name: "Govt. of Punjab",
+      title: "Health & Education Department",
+      image: "/logos/punjab-govt.jpeg",
+      fallback: "/logos/punjab-govt.png"
+    },
+    {
+      name: "IUB Bahawalpur",
+      title: "The Islamia University of Bahawalpur",
+      image: "/logos/iub-logo.jpeg",
+      fallback: "/logos/iub-logo.png"
+    },
+    {
+      name: "University of Education",
+      title: "University of Education, Lahore",
+      image: "/logos/ue-logo.jpeg",
+      fallback: "/logos/ue-logo.png"
+    },
+    {
+      name: "E-ROZGAR",
+      title: "E-ROZGAR",
+      image: "/images/26.jpeg", 
+      fallback: "/images/26.jpeg"
+    }
+  ];
 
-        {/* 5 Affiliations Logos Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
-          {affiliationsData.map((item) => (
+  // Infinite smooth loop ke liye list ko repeat kiya gaya hai
+  const scrollList = [...affiliations, ...affiliations, ...affiliations];
+
+  return (
+    <section className="py-8 bg-slate-50/80 border-b border-slate-200 overflow-hidden">
+      
+      {/* ⚡ Pure CSS High-Performance Infinite Loop Animation */}
+      <style dangerouslySetInnerHTML={{ __html: `
+        @keyframes continuousMarquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-logos-slider {
+          display: flex;
+          width: max-content;
+          animation: continuousMarquee 28s linear infinite;
+          will-change: transform;
+        }
+        .animate-logos-slider:hover {
+          animation-play-state: paused;
+        }
+      `}} />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-5 text-center">
+        <span className="text-[11px] font-black uppercase tracking-widest text-[#0D7A68] bg-teal-50 px-3.5 py-1 rounded-full border border-teal-200">
+          Recognized & Approved Affiliations
+        </span>
+        <h2 className="text-xl sm:text-2xl font-black text-[#0B1B4F] mt-2">
+          Degrees & Diplomas Accredited by National & Provincial Councils
+        </h2>
+      </div>
+
+      {/* 🚀 MOVABLE CONTINUOUS LOGOS STRIP */}
+      <div className="relative w-full overflow-hidden">
+        
+        {/* Left & Right Smooth Edge Fade Masks */}
+        <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-slate-50 to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-slate-50 to-transparent z-10 pointer-events-none" />
+
+        {/* Moving Slider Track */}
+        <div className="animate-logos-slider flex items-center gap-5 py-2">
+          {scrollList.map((item, idx) => (
             <div
-              key={item.id}
-              className="bg-white p-4 rounded-xl border border-slate-200/90 shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col items-center justify-center text-center group"
+              key={idx}
+              className="flex items-center gap-3 bg-white px-4 py-2.5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow flex-shrink-0 cursor-default"
             >
-              <div className="relative w-16 h-16 sm:w-20 sm:h-20 mb-3 transition-transform duration-200 group-hover:scale-105">
-                <Image
-                  src={item.logo}
+              {/* 🎯 BALANCED LOGO SIZE (Na bara na chota: 42px x 42px) */}
+              <div className="w-11 h-11 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center p-1 overflow-hidden flex-shrink-0">
+                <img
+                  src={item.image}
                   alt={item.name}
-                  fill
-                  className="object-contain"
+                  className="max-h-full max-w-full object-contain"
+                  onError={(e) => {
+                    // Agar .jpeg na mile toh fallback try kare
+                    if (item.fallback && e.target.src !== item.fallback) {
+                      e.target.src = item.fallback;
+                    }
+                  }}
                 />
               </div>
-              <h3 className="font-extrabold text-xs sm:text-sm text-[#0B1B4F]">
-                {item.name}
-              </h3>
-              <p className="text-[11px] text-slate-500 font-medium mt-0.5 line-clamp-1">
-                {item.role}
-              </p>
-              <span className="mt-2 text-[10px] font-bold text-[#0D7A68] bg-teal-50 px-2 py-0.5 rounded border border-teal-100">
-                Verified
-              </span>
+
+              {/* Text Info */}
+              <div className="text-left pr-2">
+                <div className="font-extrabold text-[#0B1B4F] text-xs leading-tight">
+                  {item.name}
+                </div>
+                <div className="text-[10px] text-slate-500 font-medium leading-tight mt-0.5 max-w-[190px] truncate">
+                  {item.title}
+                </div>
+              </div>
             </div>
           ))}
         </div>
 
       </div>
+
     </section>
   );
 }

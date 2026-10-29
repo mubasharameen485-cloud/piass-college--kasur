@@ -12,7 +12,8 @@ import {
   BookOpen, 
   ShieldCheck, 
   PhoneCall, 
-  ArrowRight
+  ArrowRight,
+  Activity
 } from "lucide-react";
 import { collegeInfo } from "@/data/affiliationsData";
 
@@ -41,7 +42,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
 
-          {/* Logo & Institute Identity (Box khatam, open natural look) */}
+          {/* Logo & Institute Identity */}
           <Link href="/" className="flex items-center gap-3.5 group" onClick={handleLinkClick}>
             <div className="relative w-14 h-14 flex items-center justify-center">
               <Image
@@ -55,10 +56,10 @@ export default function Navbar() {
             </div>
             <div className="flex flex-col">
               <span className="text-xl sm:text-2xl font-black tracking-tight text-[#0B1B4F] leading-none">
-                PIASS <span className="text-[#0D7A68]">COLLEGE</span>
+                PIASS <span className="text-[#0D7A68]">COLLEGE OF NURSING</span>
               </span>
-              <span className="text-xs font-semibold text-slate-600 tracking-wider uppercase mt-1">
-                of Nursing & Sciences • Kasur
+              <span className="text-xs font-semibold text-slate-500 tracking-wider uppercase mt-1">
+                 Kasur
               </span>
             </div>
           </Link>
@@ -95,107 +96,129 @@ export default function Navbar() {
                 <ChevronDown className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" />
               </Link>
 
-              {/* MEGA MENU CONTAINER WITH EXACT DEDICATED PATHS */}
+              {/* 🎯 BALANCED MEGA MENU: Left par shift kiya hai taake screen se bilkul na kate */}
               <div
-                className={`absolute top-full -left-48 xl:-left-36 w-[880px] bg-white rounded-2xl shadow-2xl border border-slate-200/90 p-6 transition-all duration-200 origin-top z-50 ${
+                className={`absolute top-full -left-[320px] lg:-left-[360px] xl:-left-[300px] w-[880px] bg-white rounded-2xl shadow-2xl border border-slate-200/90 p-5 transition-all duration-200 origin-top z-50 ${
                   programsDropdownOpen ? "opacity-100 visible scale-100 pointer-events-auto" : "opacity-0 invisible scale-95 pointer-events-none"
                 }`}
               >
-                <div className="grid grid-cols-4 gap-5">
+                <div className="grid grid-cols-4 gap-4">
 
-                  {/* Column 1: Nursing Degrees */}
-                  <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 flex flex-col justify-between">
+                  {/* 🎯 COLUMN 1: POSTER LEFT GROUP (BS NURSING • DPT • CMW) */}
+                  <div className="bg-slate-50/80 p-3.5 rounded-xl border border-slate-100 flex flex-col justify-between">
                     <div>
-                      <div className="flex items-center gap-2 text-[#0D7A68] font-bold text-sm mb-3 pb-2 border-b border-slate-200">
-                        <Stethoscope className="w-4 h-4" />
-                        <span>Nursing Degrees</span>
+                      <div className="flex items-center gap-1.5 text-[#0D7A68] font-bold text-xs uppercase tracking-wider mb-2.5 pb-2 border-b border-slate-200">
+                        <Stethoscope className="w-4 h-4 flex-shrink-0" />
+                        <span className="truncate">Nursing & Allied</span>
                       </div>
-                      <ul className="space-y-2 text-xs">
-                        <li>
-                          <Link 
-                            href="/programs/bs-nursing" 
-                            onClick={handleLinkClick}
-                            className="block p-2 rounded-lg bg-white border border-slate-200/60 hover:border-[#0D7A68] hover:text-[#0D7A68] font-medium text-slate-800 transition-all shadow-none hover:shadow-sm"
-                          >
-                            <div className="font-bold flex items-center justify-between">
-                              <span>BS Nursing (Generic)</span>
-                              <span className="text-[10px] bg-teal-100 text-teal-800 px-1.5 py-0.5 rounded font-bold">4 Yrs</span>
-                            </div>
-                            <div className="text-slate-500 text-[11px] mt-0.5">Approved by PNMC</div>
-                          </Link>
-                        </li>
-                        <li>
-                          <Link 
-                            href="/programs/post-rn" 
-                            onClick={handleLinkClick}
-                            className="block p-2 rounded-lg bg-white border border-slate-200/60 hover:border-[#0D7A68] hover:text-[#0D7A68] font-medium text-slate-800 transition-all shadow-none hover:shadow-sm"
-                          >
-                            <div className="font-bold flex items-center justify-between">
-                              <span>Post RN BSN</span>
-                              <span className="text-[10px] bg-teal-100 text-teal-800 px-1.5 py-0.5 rounded font-bold">2 Yrs</span>
-                            </div>
-                            <div className="text-slate-500 text-[11px] mt-0.5">For Registered Nurses</div>
-                          </Link>
-                        </li>
-                      </ul>
+                      
+                      <div className="space-y-2">
+                        {/* 1. BS Nursing */}
+                        <Link 
+                          href="/programs/bs-nursing" 
+                          onClick={handleLinkClick}
+                          className="block p-2 rounded-lg bg-white border border-slate-200/90 hover:border-[#0D7A68] hover:text-[#0D7A68] transition-all shadow-sm group/card"
+                        >
+                          <div className="font-bold text-xs text-slate-900 flex items-center justify-between gap-1">
+                            <span className="truncate">BS Nursing</span>
+                            <span className="text-[10px] bg-teal-100 text-teal-800 px-1.5 py-0.5 rounded font-bold whitespace-nowrap">4 Yrs</span>
+                          </div>
+                          <div className="text-slate-500 text-[11px] mt-0.5 truncate">Generic • PNMC Approved</div>
+                        </Link>
+
+                        {/* 2. DPT (Doctor of Physical Therapy) */}
+                        <Link 
+                          href="/programs/dpt" 
+                          onClick={handleLinkClick}
+                          className="block p-2 rounded-lg bg-white border border-teal-200 hover:border-[#0D7A68] hover:text-[#0D7A68] transition-all shadow-sm group/card"
+                        >
+                          <div className="font-bold text-xs text-[#0B1B4F] flex items-center justify-between gap-1">
+                            <span className="truncate">DPT</span>
+                            <span className="text-[10px] bg-emerald-600 text-white px-1.5 py-0.5 rounded font-bold whitespace-nowrap">5 Yrs</span>
+                          </div>
+                          <div className="text-[#0D7A68] text-[11px] font-semibold mt-0.5 truncate">Allied Health Sciences</div>
+                        </Link>
+
+                        {/* 3. CMW Diploma */}
+                        <Link 
+                          href="/programs/cmw" 
+                          onClick={handleLinkClick}
+                          className="block p-2 rounded-lg bg-white border border-slate-200/90 hover:border-[#0D7A68] hover:text-[#0D7A68] transition-all shadow-sm group/card"
+                        >
+                          <div className="font-bold text-xs text-slate-900 flex items-center justify-between gap-1">
+                            <span className="truncate">CMW Diploma</span>
+                            <span className="text-[10px] bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded font-bold whitespace-nowrap">2 Yrs</span>
+                          </div>
+                          <div className="text-slate-500 text-[11px] mt-0.5 truncate">Community Midwife</div>
+                        </Link>
+                      </div>
                     </div>
                   </div>
 
-                  {/* Column 2: Healthcare Diplomas */}
-                  <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 flex flex-col justify-between">
+                  {/* 🎯 COLUMN 2: POSTER RIGHT GROUP (POST RN • LHV • CNA) */}
+                  <div className="bg-slate-50/80 p-3.5 rounded-xl border border-slate-100 flex flex-col justify-between">
                     <div>
-                      <div className="flex items-center gap-2 text-emerald-700 font-bold text-sm mb-3 pb-2 border-b border-slate-200">
-                        <ShieldCheck className="w-4 h-4" />
-                        <span>Diplomas</span>
+                      <div className="flex items-center gap-1.5 text-[#0B1B4F] font-bold text-xs uppercase tracking-wider mb-2.5 pb-2 border-b border-slate-200">
+                        <ShieldCheck className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                        <span className="truncate">Post RN & Diplomas</span>
                       </div>
-                      <ul className="space-y-2 text-xs">
-                        <li>
-                          <Link 
-                            href="/programs/lhv" 
-                            onClick={handleLinkClick}
-                            className="block p-2 rounded-lg bg-white border border-slate-200/60 hover:border-emerald-700 hover:text-emerald-700 font-medium text-slate-800 transition-all"
-                          >
-                            <div className="font-bold">LHV Diploma</div>
-                            <div className="text-slate-500 text-[11px]">2 Yrs • Lady Health Visitor</div>
-                          </Link>
-                        </li>
-                        <li>
-                          <Link 
-                            href="/programs/cmw" 
-                            onClick={handleLinkClick}
-                            className="block p-2 rounded-lg bg-white border border-slate-200/60 hover:border-emerald-700 hover:text-emerald-700 font-medium text-slate-800 transition-all"
-                          >
-                            <div className="font-bold">CMW Diploma</div>
-                            <div className="text-slate-500 text-[11px]">2 Yrs • Community Midwife</div>
-                          </Link>
-                        </li>
-                        <li>
-                          <Link 
-                            href="/programs/cna" 
-                            onClick={handleLinkClick}
-                            className="block p-2 rounded-lg bg-white border border-slate-200/60 hover:border-emerald-700 hover:text-emerald-700 font-medium text-slate-800 transition-all"
-                          >
-                            <div className="font-bold">CNA Program</div>
-                            <div className="text-slate-500 text-[11px]">2 Yrs • Nursing Assistant</div>
-                          </Link>
-                        </li>
-                      </ul>
+                      
+                      <div className="space-y-2">
+                        {/* 1. Post RN BSN */}
+                        <Link 
+                          href="/programs/post-rn" 
+                          onClick={handleLinkClick}
+                          className="block p-2 rounded-lg bg-white border border-slate-200/90 hover:border-[#0D7A68] hover:text-[#0D7A68] transition-all shadow-sm group/card"
+                        >
+                          <div className="font-bold text-xs text-slate-900 flex items-center justify-between gap-1">
+                            <span className="truncate">Post RN BSN</span>
+                            <span className="text-[10px] bg-teal-100 text-teal-800 px-1.5 py-0.5 rounded font-bold whitespace-nowrap">2 Yrs</span>
+                          </div>
+                          <div className="text-slate-500 text-[11px] mt-0.5 truncate">For Registered Nurses</div>
+                        </Link>
+
+                        {/* 2. LHV Diploma */}
+                        <Link 
+                          href="/programs/lhv" 
+                          onClick={handleLinkClick}
+                          className="block p-2 rounded-lg bg-white border border-slate-200/90 hover:border-[#0D7A68] hover:text-[#0D7A68] transition-all shadow-sm group/card"
+                        >
+                          <div className="font-bold text-xs text-slate-900 flex items-center justify-between gap-1">
+                            <span className="truncate">LHV Diploma</span>
+                            <span className="text-[10px] bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded font-bold whitespace-nowrap">2 Yrs</span>
+                          </div>
+                          <div className="text-slate-500 text-[11px] mt-0.5 truncate">Lady Health Visitor</div>
+                        </Link>
+
+                        {/* 3. CNA Program */}
+                        <Link 
+                          href="/programs/cna" 
+                          onClick={handleLinkClick}
+                          className="block p-2 rounded-lg bg-white border border-slate-200/90 hover:border-[#0D7A68] hover:text-[#0D7A68] transition-all shadow-sm group/card"
+                        >
+                          <div className="font-bold text-xs text-slate-900 flex items-center justify-between gap-1">
+                            <span className="truncate">CNA Program</span>
+                            <span className="text-[10px] bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded font-bold whitespace-nowrap">2 Yrs</span>
+                          </div>
+                          <div className="text-slate-500 text-[11px] mt-0.5 truncate">Nursing Assistant</div>
+                        </Link>
+                      </div>
                     </div>
                   </div>
 
-                  {/* Column 3: BS Degrees */}
-                  <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 flex flex-col justify-between">
+                  {/* 3. BS PROGRAMS (4 Yrs) */}
+                  <div className="bg-slate-50/80 p-3.5 rounded-xl border border-slate-100 flex flex-col justify-between">
                     <div>
-                      <div className="flex items-center gap-2 text-[#0B1B4F] font-bold text-sm mb-3 pb-2 border-b border-slate-200">
-                        <GraduationCap className="w-4 h-4" />
-                        <span>BS Programs (4 Yrs)</span>
+                      <div className="flex items-center gap-1.5 text-[#0B1B4F] font-bold text-xs uppercase tracking-wider mb-2.5 pb-2 border-b border-slate-200">
+                        <GraduationCap className="w-4 h-4 text-blue-700 flex-shrink-0" />
+                        <span className="truncate">BS Degrees (4 Yrs)</span>
                       </div>
                       <ul className="space-y-1.5 text-xs">
                         <li>
                           <Link 
                             href="/programs/bscs" 
                             onClick={handleLinkClick}
-                            className="block p-1.5 rounded-lg hover:bg-white hover:text-blue-700 font-semibold text-slate-700 transition-all"
+                            className="block p-1.5 rounded-lg hover:bg-white hover:text-blue-700 font-semibold text-slate-700 transition-all truncate"
                           >
                             • BS Computer Science
                           </Link>
@@ -204,7 +227,7 @@ export default function Navbar() {
                           <Link 
                             href="/programs/bsit" 
                             onClick={handleLinkClick}
-                            className="block p-1.5 rounded-lg hover:bg-white hover:text-blue-700 font-semibold text-slate-700 transition-all"
+                            className="block p-1.5 rounded-lg hover:bg-white hover:text-blue-700 font-semibold text-slate-700 transition-all truncate"
                           >
                             • BS Information Tech
                           </Link>
@@ -213,7 +236,7 @@ export default function Navbar() {
                           <Link 
                             href="/programs/bba" 
                             onClick={handleLinkClick}
-                            className="block p-1.5 rounded-lg hover:bg-white hover:text-blue-700 font-semibold text-slate-700 transition-all"
+                            className="block p-1.5 rounded-lg hover:bg-white hover:text-blue-700 font-semibold text-slate-700 transition-all truncate"
                           >
                             • BBA (Business Admin)
                           </Link>
@@ -222,7 +245,7 @@ export default function Navbar() {
                           <Link 
                             href="/programs/bs-english" 
                             onClick={handleLinkClick}
-                            className="block p-1.5 rounded-lg hover:bg-white hover:text-blue-700 font-semibold text-slate-700 transition-all"
+                            className="block p-1.5 rounded-lg hover:bg-white hover:text-blue-700 font-semibold text-slate-700 transition-all truncate"
                           >
                             • BS English Literature
                           </Link>
@@ -231,19 +254,19 @@ export default function Navbar() {
                     </div>
                   </div>
 
-                  {/* Column 4: ADP Programs */}
-                  <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 flex flex-col justify-between">
+                  {/* 4. ADP PROGRAMS (2 Yrs) */}
+                  <div className="bg-slate-50/80 p-3.5 rounded-xl border border-slate-100 flex flex-col justify-between">
                     <div>
-                      <div className="flex items-center gap-2 text-indigo-700 font-bold text-sm mb-3 pb-2 border-b border-slate-200">
-                        <BookOpen className="w-4 h-4" />
-                        <span>ADP Programs (2 Yrs)</span>
+                      <div className="flex items-center gap-1.5 text-indigo-700 font-bold text-xs uppercase tracking-wider mb-2.5 pb-2 border-b border-slate-200">
+                        <BookOpen className="w-4 h-4 flex-shrink-0" />
+                        <span className="truncate">ADP Programs (2 Yrs)</span>
                       </div>
                       <ul className="space-y-1.5 text-xs">
                         <li>
                           <Link 
                             href="/programs/adp-cs" 
                             onClick={handleLinkClick}
-                            className="block p-1.5 rounded-lg hover:bg-white hover:text-indigo-700 font-semibold text-slate-700 transition-all"
+                            className="block p-1.5 rounded-lg hover:bg-white hover:text-indigo-700 font-semibold text-slate-700 transition-all truncate"
                           >
                             • ADP Computer Science
                           </Link>
@@ -252,7 +275,7 @@ export default function Navbar() {
                           <Link 
                             href="/programs/adp-it" 
                             onClick={handleLinkClick}
-                            className="block p-1.5 rounded-lg hover:bg-white hover:text-indigo-700 font-semibold text-slate-700 transition-all"
+                            className="block p-1.5 rounded-lg hover:bg-white hover:text-indigo-700 font-semibold text-slate-700 transition-all truncate"
                           >
                             • ADP Information Tech
                           </Link>
@@ -261,7 +284,7 @@ export default function Navbar() {
                           <Link 
                             href="/programs/adp-bba" 
                             onClick={handleLinkClick}
-                            className="block p-1.5 rounded-lg hover:bg-white hover:text-indigo-700 font-semibold text-slate-700 transition-all"
+                            className="block p-1.5 rounded-lg hover:bg-white hover:text-indigo-700 font-semibold text-slate-700 transition-all truncate"
                           >
                             • ADP Business Admin
                           </Link>
@@ -270,7 +293,7 @@ export default function Navbar() {
                           <Link 
                             href="/programs/adp-english" 
                             onClick={handleLinkClick}
-                            className="block p-1.5 rounded-lg hover:bg-white hover:text-indigo-700 font-semibold text-slate-700 transition-all"
+                            className="block p-1.5 rounded-lg hover:bg-white hover:text-indigo-700 font-semibold text-slate-700 transition-all truncate"
                           >
                             • ADP English & Post ADP
                           </Link>
@@ -281,8 +304,11 @@ export default function Navbar() {
 
                 </div>
 
-                <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                  <span>Affiliated with University of Education (UE) & IUB</span>
+                {/* Bottom Footer Bar */}
+                <div className="mt-3.5 pt-2.5 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                  <span className="flex items-center gap-1 text-[#0D7A68] font-semibold">
+                    <Activity className="w-3.5 h-3.5" /> 100% Hospital Clinical Attachments Included
+                  </span>
                   <Link 
                     href="/programs" 
                     onClick={handleLinkClick}
@@ -303,7 +329,7 @@ export default function Navbar() {
             </Link>
           </nav>
 
-          {/* Right Action Button (Desktop) */}
+          {/* Right Action Button */}
           <div className="hidden lg:flex items-center gap-3">
             <Link
               href="/contact"
@@ -346,27 +372,30 @@ export default function Navbar() {
             About College
           </Link>
 
-          {/* Mobile Programs Accordion */}
+          {/* Mobile Programs List */}
           <div className="border border-slate-200 rounded-xl p-3 bg-slate-50">
             <div className="font-black text-[#0B1B4F] text-sm mb-2 flex items-center justify-between">
-              <span>All Programs (Dedicated Pages)</span>
-              <span className="text-[10px] bg-teal-100 text-teal-800 px-2 py-0.5 rounded-full font-bold">13 Disciplines</span>
+              <span>Programs (Nursing & Allied Health)</span>
+              <span className="text-[10px] bg-teal-100 text-teal-800 px-2 py-0.5 rounded-full font-bold">14 Programs</span>
             </div>
             <div className="space-y-1.5 text-xs font-semibold">
               <Link href="/programs/bs-nursing" onClick={handleLinkClick} className="block p-2 bg-white rounded border border-slate-200 text-slate-800 hover:text-[#0D7A68]">
                 🩺 BS Nursing (Generic 4 Yrs)
               </Link>
+              <Link href="/programs/dpt" onClick={handleLinkClick} className="block p-2 bg-teal-50 rounded border border-teal-200 text-[#0B1B4F] hover:text-[#0D7A68] font-bold">
+                ⚡ DPT (Doctor of Physical Therapy - 5 Yrs)
+              </Link>
+              <Link href="/programs/cmw" onClick={handleLinkClick} className="block p-2 bg-white rounded border border-slate-200 text-slate-800 hover:text-[#0D7A68]">
+                👶 CMW (Community Midwife 2 Yrs)
+              </Link>
               <Link href="/programs/post-rn" onClick={handleLinkClick} className="block p-2 bg-white rounded border border-slate-200 text-slate-800 hover:text-[#0D7A68]">
                 🩺 Post RN BSN (2 Yrs)
               </Link>
               <Link href="/programs/lhv" onClick={handleLinkClick} className="block p-2 bg-white rounded border border-slate-200 text-slate-800 hover:text-[#0D7A68]">
-                👶 LHV (Lady Health Visitor)
-              </Link>
-              <Link href="/programs/cmw" onClick={handleLinkClick} className="block p-2 bg-white rounded border border-slate-200 text-slate-800 hover:text-[#0D7A68]">
-                👶 CMW (Community Midwife)
+                👶 LHV Diploma (2 Yrs)
               </Link>
               <Link href="/programs/cna" onClick={handleLinkClick} className="block p-2 bg-white rounded border border-slate-200 text-slate-800 hover:text-[#0D7A68]">
-                👶 CNA (Nursing Assistant)
+                👶 CNA Program (2 Yrs)
               </Link>
               <Link href="/programs/bscs" onClick={handleLinkClick} className="block p-2 bg-white rounded border border-slate-200 text-slate-800 hover:text-[#0D7A68]">
                 💻 BS Computer Science (BSCS)
@@ -379,9 +408,6 @@ export default function Navbar() {
               </Link>
               <Link href="/programs/bs-english" onClick={handleLinkClick} className="block p-2 bg-white rounded border border-slate-200 text-slate-800 hover:text-[#0D7A68]">
                 📚 BS English Literature
-              </Link>
-              <Link href="/programs/adp-cs" onClick={handleLinkClick} className="block p-2 bg-white rounded border border-slate-200 text-slate-800 hover:text-[#0D7A68]">
-                🎓 ADP Programs (2 Years)
               </Link>
             </div>
           </div>

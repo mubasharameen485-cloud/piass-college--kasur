@@ -15,7 +15,7 @@ export default function TopBar() {
               Admissions Open {collegeInfo.admissionsYear}
             </span>
             <span className="hidden md:inline-block text-slate-300">
-              Approved by PNMC & Govt. of Punjab
+              Approve by PMNC, NEBP, IUB, UOE & Govt. of Punjab 
             </span>
           </div>
 
@@ -43,7 +43,7 @@ export default function TopBar() {
 
             <div className="hidden lg:flex items-center gap-1.5 text-slate-300">
               <MapPin className="w-3.5 h-3.5 text-[#0D7A68]" />
-              <span>Ferozpur Road, Kasur</span>
+              <span>Opposite New Bus Terminal, Ferozpur Kasur</span>
             </div>
           </div>
 

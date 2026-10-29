@@ -1,5 +1,31 @@
 export const programsData = [
   // ================= NURSING DEGREE PROGRAMS =================
+
+// 🎯 DPT (Allied Health Sciences)
+  {
+    slug: "dpt",
+    id: "dpt",
+    title: "Doctor of Physical Therapy (DPT)",
+    category: "Allied Health Sciences",
+    categorySlug: "allied-health",
+    duration: "5 Years (10 Semesters)",
+    eligibility: "F.Sc (Pre-Medical) with minimum 60% Marks. Recognized by HEC.",
+    recognizedBy: "HEC & University Affiliated (Allied Health Sciences)",
+    description: "5-year clinical doctoral degree training physical therapists in musculoskeletal rehabilitation, sports medicine, neuro-rehab, and physical therapy practice.",
+    seats: "40 Seats",
+    scope: "Clinical Physiotherapist in Government DHQ/THQ Hospitals, Sports Teams, Military Rehab Centers, Private Clinics, and Overseas Licensure (UK, USA, Gulf).",
+    highlights: [
+      "Hospital Bedside Physiotherapy Rotations",
+      "Advanced Electrotherapy & Biomechanics Labs",
+      "Neuro-Muscular Rehabilitation Training",
+      "Direct Clinical Practice with Certified Doctors"
+    ],
+    subjects: ["Anatomy & Histology", "Physiology", "Biomechanics & Kinesiology", "Therapeutics", "Neuro-Anatomy", "Clinical Rehabilitation"]
+  },
+
+
+
+
   {
     id: "bs-nursing",
     title: "BS Nursing (Generic)",
@@ -184,7 +210,7 @@ export const heroSlidesData = [
     tag: "Admissions Open 2026",
     title: "Excellence in Nursing & Healthcare Education",
     subtitle: "Accredited by PNMC & NEBP. Training the next generation of compassionate nurses and certified midwives with intensive clinical rotations.",
-    image: "/images/14.avif",
+    image: "/images/q.jpeg",
     primaryCta: "Explore Nursing",
     primaryLink: "#nursing",
     secondaryCta: "Apply for 2026",

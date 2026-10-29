@@ -8,41 +8,43 @@ import {
   CheckCircle2, 
   ArrowRight, 
   ShieldCheck, 
-  Sparkles, 
   PhoneCall, 
-  BookOpen, 
-  Calendar, 
-  Users, 
   GraduationCap, 
-  ChevronRight, 
-  Building2 
+  ChevronRight 
 } from "lucide-react";
 import { programsData } from "@/data/programsData";
-import { collegeInfo } from "@/data/affiliationsData";
 
-// Dynamic metadata taake har program ka Google Title alag ho
+
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;
-  const program = programsData.find((p) => p.id === resolvedParams.slug);
+  const program = programsData.find((p) => (p.slug || p.id) === resolvedParams?.slug);
 
   if (!program) {
     return { title: "Program Not Found | PIASS Kasur" };
   }
 
   return {
-    title: `${program.title} Admissions 2026 | PIASS College Kasur`,
-    description: `Apply for ${program.title} at PIASS College Kasur. Duration: ${program.duration}. ${program.accreditation}. Eligibility: ${program.eligibility}.`,
+    title: `${program.title} Admissions 2026 | PIASS College of nursing Kasur`,
+    description: `Apply for ${program.title} at PIASS College of nursing  Kasur. Duration: ${program.duration}. Eligibility: ${program.eligibility}.`,
   };
 }
 
 export default async function ProgramDetailPage({ params }) {
   const resolvedParams = await params;
-  const program = programsData.find((p) => p.id === resolvedParams.slug);
+  const program = programsData.find((p) => (p.slug || p.id) === resolvedParams?.slug);
 
-  // Agar ghalat URL ho toh 404 page
+  
   if (!program) {
     notFound();
   }
+
+  const accreditationText = program.accreditation || program.recognizedBy || "PNMC & University Affiliated";
+  const highlightsList = program.highlights || program.subjects || [
+    "Clinical hospital training and bedside patient care",
+    "Modern laboratories and simulated healthcare equipment",
+    "Recognized degree credentials for public and private employment"
+  ];
+  const programImage = program.image || "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=1200&auto=format&fit=crop";
 
   return (
     <div className="flex flex-col w-full min-h-screen bg-white">
@@ -63,7 +65,7 @@ export default async function ProgramDetailPage({ params }) {
           <div className="max-w-4xl">
             <div className="flex flex-wrap items-center gap-2 mb-3">
               <span className={`text-white text-xs font-black px-3 py-1 rounded-md shadow-sm ${program.badgeColor || "bg-teal-700"}`}>
-                {program.category}
+                {program.category || "Degree Program"}
               </span>
               <span className="bg-[#F59E0B] text-slate-950 text-xs font-black px-3 py-1 rounded-md shadow-sm">
                 Admissions Open 2026
@@ -85,7 +87,7 @@ export default async function ProgramDetailPage({ params }) {
               </div>
               <div className="flex items-center gap-1.5 bg-blue-950/60 px-3 py-1.5 rounded-lg border border-blue-900">
                 <Award className="w-4 h-4 text-[#0D7A68]" />
-                <span>{program.accreditation}</span>
+                <span>{accreditationText}</span>
               </div>
             </div>
 
@@ -94,19 +96,18 @@ export default async function ProgramDetailPage({ params }) {
         </div>
       </section>
 
-      {/* 2. Program Details Grid (Left: Content, Right: Sticky Apply Desk) */}
+      {/* 2. Program Details Grid */}
       <section className="py-14 sm:py-20 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
             
-            {/* Left Column: Image, Criteria, Curriculum, Highlights */}
+            {/* Left Column */}
             <div className="lg:col-span-8 space-y-8">
               
-              {/* High-Resolution Dedicated Image */}
               <div className="relative h-72 sm:h-96 w-full rounded-3xl overflow-hidden shadow-lg border-4 border-white bg-slate-200">
                 <Image
-                  src={program.image}
+                  src={programImage}
                   alt={program.title}
                   fill
                   priority
@@ -131,7 +132,7 @@ export default async function ProgramDetailPage({ params }) {
                 </p>
               </div>
 
-              {/* Key Practical & Clinical Highlights */}
+              {/* Key Highlights */}
               <div className="bg-white p-7 rounded-3xl border border-slate-200 shadow-sm">
                 <div className="flex items-center gap-2.5 text-[#0B1B4F] font-bold text-sm mb-3">
                   <GraduationCap className="w-5 h-5 text-[#0D7A68]" />
@@ -141,7 +142,7 @@ export default async function ProgramDetailPage({ params }) {
                   Key Competencies & Practical Training:
                 </h3>
                 <ul className="space-y-3">
-                  {program.highlights.map((h, i) => (
+                  {highlightsList.map((h, i) => (
                     <li key={i} className="flex items-start gap-3 text-sm text-slate-700">
                       <div className="w-5 h-5 rounded-full bg-teal-100 text-[#0D7A68] flex items-center justify-center flex-shrink-0 mt-0.5 font-black text-xs">
                         ✓
@@ -152,13 +153,13 @@ export default async function ProgramDetailPage({ params }) {
                 </ul>
               </div>
 
-              {/* Career Scope in Pakistan */}
+              {/* Career Scope */}
               <div className="bg-white p-7 rounded-3xl border border-slate-200 shadow-sm">
                 <h3 className="text-xl font-black text-[#0B1B4F] mb-3">
                   Career Scope & Employment Pathways
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  Graduates of this discipline from PIASS College of Nursing & Sciences hold recognized qualifications that open doors for DHQ/THQ public hospital appointments, private healthcare setups, software development firms, and corporate multinational organizations across Pakistan and abroad.
+                  {program.scope || "Graduates of this discipline hold recognized qualifications that open doors for DHQ/THQ public hospital appointments, private healthcare setups, software firms, and corporate multinational organizations across Pakistan and abroad."}
                 </p>
               </div>
 
@@ -186,7 +187,7 @@ export default async function ProgramDetailPage({ params }) {
                   </div>
                   <div className="flex items-center justify-between text-slate-600">
                     <span>Affiliation:</span>
-                    <strong className="text-[#0D7A68]">{program.accreditation}</strong>
+                    <strong className="text-[#0D7A68]">{accreditationText}</strong>
                   </div>
                   <div className="flex items-center justify-between text-slate-600">
                     <span>Campus:</span>
@@ -200,7 +201,7 @@ export default async function ProgramDetailPage({ params }) {
 
                 <div className="space-y-3">
                   <Link
-                    href="/contact"
+                    href="/admissions/apply"
                     className="w-full inline-flex items-center justify-center gap-2 bg-[#0B1B4F] hover:bg-[#0D7A68] text-white font-bold text-xs sm:text-sm py-3.5 rounded-xl shadow-md transition-all active:scale-95"
                   >
                     <span>Apply Online For This Program</span>
@@ -224,7 +225,6 @@ export default async function ProgramDetailPage({ params }) {
 
               </div>
 
-              {/* Kasur Office Timing Card */}
               <div className="bg-slate-100 p-5 rounded-2xl border border-slate-200 text-xs text-slate-600">
                 <div className="font-bold text-[#0B1B4F] mb-1">Campus Admissions Office</div>
                 <div>Main Ferozpur Road, Opposite New Bus Terminal Kasur.</div>
@@ -240,4 +240,15 @@ export default async function ProgramDetailPage({ params }) {
 
     </div>
   );
+}
+
+
+export async function generateStaticParams() {
+  if (!Array.isArray(programsData)) return [];
+
+  return programsData
+    .filter((program) => Boolean(program?.slug || program?.id))
+    .map((program) => ({
+      slug: String(program.slug || program.id),
+    }));
 }

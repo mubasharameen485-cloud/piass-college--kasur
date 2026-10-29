@@ -1,796 +1,473 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { 
-  ShieldCheck, 
-  Award, 
-  Stethoscope, 
-  Laptop, 
-  BookOpen, 
-  Users, 
-  Eye, 
-  CheckCircle2, 
-  Building2, 
-  ArrowRight, 
-  Zap, 
-  Video, 
-  Droplet, 
-  GraduationCap, 
-  Lock, 
-  Sparkles, 
-  PhoneCall, 
-  HeartHandshake, 
-  Check, 
-  Clock, 
-  Layers 
-} from "lucide-react";
-import { collegeInfo, affiliationsData } from "@/data/affiliationsData";
-
-export const metadata = {
-  title: "About Us | PIASS College of Nursing & Sciences Kasur",
-  description:
-    "Comprehensive institutional profile of PIASS College Kasur. Leadership, distinguished M.Phil/PhD faculty, clinical simulation labs, female safety, smart multimedia classrooms, and campus facilities.",
-};
+import { ArrowRight, ChevronLeft, ChevronRight, ShieldCheck, Award, GraduationCap } from "lucide-react";
+import { collegeInfo } from "@/data/affiliationsData";
 
 export default function AboutPage() {
   
-  // 1. LEADERSHIP & EXECUTIVE DIRECTORATE
-  const leadershipTeam = [
-    {
-      role: "Managing Director & Chief Executive",
-      name: "Prof. Dr. M. Arshad (Consultant)",
-      degrees: "M.B.B.S, F.C.P.S, M.Phil (Medical Sciences)",
-      experience: "25+ Years Clinical & Academic Experience",
-      message: "Our supreme priority at PIASS Kasur is to deliver uncompromised medical and computing ethics. We prepare professionals who treat healthcare not just as a job, but as a sacred public duty.",
-      image: "/images/17.avif",
-      badge: "Medical Directorate"
-    },
-    {
-      role: "Vice Director & Principal (Nursing Affairs)",
-      name: "Prof. Tahira Parveen (Senior Nursing Officer)",
-      degrees: "MSN (Nursing), Post RN BSN, Registered Nurse (RN/RM)",
-      experience: "18+ Years Hospital Nursing Administration",
-      message: "We train our nursing daughters with rigorous bedside discipline. Through hands-on hospital rotations and simulated skill labs, our graduates become leaders in emergency wards across Punjab.",
-      image: "/images/17.avif",
-      badge: "Clinical Nursing Directorate"
-    },
-    {
-      role: "Director Administration & Academic Operations",
-      name: "Engr. Tariq Mahmood",
-      degrees: "M.S (Software Engineering), M.Phil (CS / Operations)",
-      experience: "15+ Years Higher Education Management",
-      message: "From high-speed fiber-optic computer labs to uninterrupted power supply and strict gate security, we ensure that students study in a 100% safe, disciplined, and technologically modern campus.",
-      image: "/images/22.avif",
-      badge: "Campus Operations"
-    }
-  ];
+  const [activeYearIndex, setActiveYearIndex] = useState(0);
 
-  // 2. FACULTY DIVISIONS (Qualified Male & Female Cadres)
-  const facultyDepartments = [
+  const milestones = [
     {
-      dept: "Department of Clinical Nursing & Sciences",
-      qualification: "MSN, Post RN, MBBS Clinical Doctors",
-      description: "Dedicated team of registered nursing tutors and senior medical doctors overseeing clinical pharmacology, anatomy, surgical nursing, and bedside training.",
-      femaleRatio: "65% Female Nursing Instructors (Providing comfort & mentorship for female students)",
-      cadre: "Clinical & Hospital Training"
+      year: "2018",
+      title: "Foundational Stone Laid",
+      desc: "The foundational stone of PIASS College of Nursing was laid on Main Ferozpur Road Kasur to provide recognized medical education to students of Punjab.",
+      image: "/images/27.jpg"
     },
     {
-      dept: "Department of Computer Science & IT",
-      qualification: "M.Phil / MS Computer Science & Software Engineers",
-      description: "Seasoned coding mentors and network engineers training students in programming, web development, data structures, and computer lab practicals.",
-      femaleRatio: "Co-educational Faculty with specialized lab demonstrators",
-      cadre: "Software & Technology"
+      year: "2020",
+      title: "Punjab Health Dept & NEBP Registration",
+      desc: "Attained official provincial registration with the Health Department Government of Punjab and affiliation with the Nursing Examination Board Punjab (NEBP).",
+      image: "/images/18.avif"
     },
     {
-      dept: "Department of Management & Business Studies",
-      qualification: "MBA, M.Phil Management Sciences",
-      description: "Faculty members with corporate exposure delivering interactive lectures in financial accounting, marketing strategy, and business management.",
-      femaleRatio: "Experienced Senior Lecturers",
-      cadre: "Corporate Management"
+      year: "2022",
+      title: "PNMC Accreditation for BSN",
+      desc: "Secured formal statutory accreditation from the Pakistan Nursing & Midwifery Council (PNMC) Islamabad for 4-Year BS Nursing (Generic) and Post RN programs.",
+      image: "/images/1.avif"
     },
     {
-      dept: "Department of English Literature & Humanities",
-      qualification: "M.Phil English (Linguistics & Literature)",
-      description: "Language experts focusing on spoken English fluency, technical writing, academic grammar, and professional clinical communication.",
-      femaleRatio: "Dedicated English Language Mentors",
-      cadre: "Communication Skills"
-    }
-  ];
-
-  // 3. SPECIALIZED SEPARATE LABORATORIES
-  const labFacilities = [
-    {
-      title: "Medical & Nursing Skill Simulation Lab",
-      category: "Healthcare Practicals",
-      desc: "Equipped with life-sized anatomical mannequins, multi-parameter vital sign monitors, hospital patient beds, IV therapy stations, and sterile catheterization models for zero-risk practice.",
-      image: "/images/18.avif",
-      points: ["Full-Body Clinical Mannequins", "Emergency Crash Cart & IV Setups", "Bedside Hygiene Simulation"]
+      year: "2024",
+      title: "University Affiliated Degree Expansion",
+      desc: "Expanded into high-demand higher education disciplines (BSCS, BSIT, BBA) in formal academic affiliation with the University of Education Lahore and IUB.",
+      image: "/images/19.avif"
     },
     {
-      title: "Advanced Computer Science & IT Lab",
-      category: "Computing & Software",
-      desc: "Fully air-conditioned computer laboratory with branded Core i7 workstations, high-speed fiber internet, Linux/Windows environments, and projection monitors for coding sessions.",
-      image: "/images/24.webp",
-      points: ["Dedicated Individual Workstations", "High-Speed Fiber Connectivity", "Modern Software Development IDEs"]
-    },
-    {
-      title: "Anatomy, Physiology & Science Demonstration Lab",
-      category: "Foundational Medical Sciences",
-      desc: "Spacious laboratory featuring detailed skeletal models, human organ charts, histological microscopes, and chemical reagents for practical bio-science experiments.",
-      image: "/images/25.webp",
-      points: ["Complete Human Skeleton & Organ Models", "High-Resolution Microscopes", "Hands-on Dissection Displays"]
+      year: "2026",
+      title: "Session 2026 Admissions",
+      desc: "Currently accepting admissions across 15+ degree and diploma programs with 100% clinical bedside rotations in affiliated teaching hospitals.",
+      image: "/images/27.jpg"
     }
   ];
 
   return (
-    <div className="flex flex-col w-full min-h-screen bg-white">
+    <div className="w-full min-h-screen bg-white text-[#222222] font-sans antialiased">
       
-      {/* 1. HERO HEADER BANNER */}
-      <section className="bg-gradient-to-r from-[#071233] via-[#0B1B4F] to-[#0A2540] text-white py-16 sm:py-24 border-b-4 border-[#0D7A68]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <span className="inline-flex items-center gap-2 bg-[#F59E0B] text-slate-950 px-3.5 py-1 rounded-full text-xs font-black uppercase tracking-wider mb-4 shadow-md">
-              <Sparkles className="w-3.5 h-3.5 fill-current" />
-              Institutional Profile • Kasur Campus
-            </span>
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight">
-              About PIASS College of <span className="text-[#0D7A68]">Nursing & Sciences</span>
+      {/* ========================================================
+          1. TOP HERO BANNER (Full-width Campus Building + Large "About")
+         ======================================================== */}
+      <section className="relative w-full">
+        {/* Campus Building Hero Photo */}
+        <div className="relative w-full h-[280px] sm:h-[420px] lg:h-[500px] overflow-hidden bg-gray-100">
+          <Image
+            src="/images/27.jpg"
+            alt="PIASS College Kasur Campus"
+            fill
+            priority
+            className="object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+          
+          {/* Large Serif "About" Title on top of the image */}
+          <div className="absolute bottom-6 sm:bottom-10 left-0 right-0 max-w-6xl mx-auto px-6 sm:px-8">
+            <h1 className="font-serif text-5xl sm:text-7xl lg:text-8xl text-white font-normal tracking-tight drop-shadow-md">
+              About
             </h1>
-            <p className="mt-5 text-sm sm:text-base lg:text-lg text-slate-200 leading-relaxed">
-              Established on Main Ferozpur Road Kasur, PIASS College is a recognized seat of healthcare learning and higher degree education, officially accredited by PNMC Islamabad, NEBP Lahore, and affiliated with leading state universities.
-            </p>
           </div>
         </div>
-      </section>
 
-      {/* 2. INSTITUTIONAL ESSENCE: VISION, MISSION & LEGAL CREDIBILITY */}
-      <section className="py-16 sm:py-20 bg-slate-50 border-b border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-            
-            <div className="lg:col-span-7 space-y-6">
-              <span className="text-xs font-black uppercase tracking-widest text-[#0D7A68] bg-teal-50 px-3.5 py-1.5 rounded-full border border-teal-200">
-                Our Foundational Ethos
-              </span>
-              <h2 className="text-2xl sm:text-4xl font-black text-[#0B1B4F] tracking-tight leading-tight">
-                Empowering Kasur with World-Class Healthcare & Technological Expertise
-              </h2>
-              <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-                PIASS College was founded with the mission to eliminate the need for students of Kasur district to travel to distant cities for quality nursing and degree education. By uniting direct teaching hospital affiliations with modern computing laboratories, we provide an inspiring, highly disciplined learning atmosphere.
-              </p>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm">
-                  <div className="w-9 h-9 rounded-xl bg-teal-100 text-[#0D7A68] flex items-center justify-center font-black mb-3">
-                    🎯
-                  </div>
-                  <h3 className="font-extrabold text-base text-[#0B1B4F]">Institutional Vision</h3>
-                  <p className="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                    To be the foremost center of clinical nursing and computing excellence in Punjab, recognized for zero-compromise patient care ethics and professional competence.
-                  </p>
-                </div>
-
-                <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm">
-                  <div className="w-9 h-9 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-black mb-3">
-                    💡
-                  </div>
-                  <h3 className="font-extrabold text-base text-[#0B1B4F]">Educational Mission</h3>
-                  <p className="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                    To nurture compassionate nurses, certified midwives, and technology professionals through personalized mentorship, advanced simulation labs, and clinical hospital rotations.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="lg:col-span-5 relative">
-              <div className="relative h-[420px] rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
-                <Image
-                  src="/images/17.avif"
-                  alt="Students at PIASS Campus"
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0B1B4F]/90 via-transparent to-transparent" />
-                <div className="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur-md p-4 rounded-2xl border border-slate-200">
-                  <div className="text-xs font-bold text-[#0D7A68] uppercase">Legal Status</div>
-                  <div className="text-sm font-black text-[#0B1B4F] mt-0.5">Approved by PNMC, NEBP & Punjab Govt</div>
-                  <div className="text-[11px] text-slate-500 mt-0.5">Affiliated with University of Education & IUB</div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-      </section>
-
-      {/* 3. EXECUTIVE DIRECTORATE & PRINCIPAL SPOTLIGHT (Formal Leadership) */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="text-center max-w-3xl mx-auto mb-14">
-            <span className="text-xs font-black uppercase tracking-widest text-[#0D7A68] bg-teal-50 px-4 py-1.5 rounded-full border border-teal-200">
-              Governance & Leadership
-            </span>
-            <h2 className="text-3xl sm:text-5xl font-black text-[#0B1B4F] tracking-tight mt-3">
-              Board of Academic & Medical Directorate
-            </h2>
-            <p className="text-slate-600 text-xs sm:text-sm md:text-base mt-3">
-              PIASS is led by seasoned medical consultants, clinical nursing superintendents, and higher education managers with decades of institutional experience.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {leadershipTeam.map((leader, i) => (
-              <div
-                key={i}
-                className="bg-slate-50 rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
-              >
-                <div>
-                  {/* Photo with Badge */}
-                  <div className="relative h-64 w-full bg-slate-200 overflow-hidden">
-                    <Image
-                      src={leader.image}
-                      alt={leader.name}
-                      fill
-                      className="object-cover object-top"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                    <span className="absolute top-4 left-4 bg-[#0B1B4F] text-white text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded-md shadow-md">
-                      {leader.badge}
-                    </span>
-                    <div className="absolute bottom-3 left-4 right-4 text-white">
-                      <span className="text-[11px] font-bold text-[#F59E0B] block">{leader.role}</span>
-                      <h3 className="text-lg font-black leading-snug">{leader.name}</h3>
-                    </div>
-                  </div>
-
-                  {/* Body Content */}
-                  <div className="p-6">
-                    {/* Degree & Certification Chip */}
-                    <div className="bg-white p-3 rounded-xl border border-slate-200 mb-4">
-                      <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Qualifications:</div>
-                      <div className="text-xs font-black text-[#0D7A68] mt-0.5">{leader.degrees}</div>
-                      <div className="text-[11px] text-slate-500 font-semibold mt-0.5">{leader.experience}</div>
-                    </div>
-
-                    <p className="text-xs text-slate-600 leading-relaxed italic border-l-2 border-[#0D7A68] pl-3">
-                      "{leader.message}"
-                    </p>
-                  </div>
-                </div>
-
-                <div className="px-6 pb-6 pt-2">
-                  <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#0B1B4F]">
-                    <ShieldCheck className="w-4 h-4 text-[#0D7A68]" /> Verified Institutional Directorate
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-        </div>
-      </section>
-
-      {/* 4. DISTINGUISHED FACULTY CADRES & TEACHING METHODOLOGY */}
-      <section className="py-20 bg-slate-50 border-t border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-14">
-            <div className="lg:col-span-8">
-              <span className="text-xs font-black uppercase tracking-widest text-[#0D7A68] bg-teal-50 px-4 py-1.5 rounded-full border border-teal-200">
-                Academic Staff & Mentorship
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-black text-[#0B1B4F] tracking-tight mt-3">
-                Highly Qualified M.Phil, PhD & Clinical Faculty
-              </h2>
-              <p className="text-slate-600 text-xs sm:text-sm md:text-base mt-2">
-                We believe that great colleges are defined by their teachers. PIASS Kasur maintains a balanced, highly credentialed cadre of male and female educators, ensuring that both clinical nursing concepts and computer science principles are thoroughly explained.
-              </p>
-            </div>
-
-            {/* Respectful Female & Male Teacher Representation Card */}
-            <div className="lg:col-span-4 bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-4">
-              {/* Minimalist culturally dignified avatar */}
-              <div className="w-14 h-14 rounded-2xl bg-teal-50 border border-teal-100 flex items-center justify-center flex-shrink-0">
-                <svg className="w-8 h-8 text-[#0D7A68]" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2C9.243 2 7 4.243 7 7c0 2.21 1.442 4.085 3.447 4.745C7.432 12.637 5 15.534 5 19v1h14v-1c0-3.466-2.432-6.363-5.447-7.255C15.558 11.085 17 9.21 17 7c0-2.757-2.243-5-5-5zm0 2c1.654 0 3 1.346 3 3s-1.346 3-3 3-3-1.346-3-3 1.346-3 3-3zm0 9c3.309 0 6 2.691 6 6H6c0-3.309 2.691-6 6-6z" />
-                </svg>
-              </div>
-              <div>
-                <h4 className="font-extrabold text-sm text-[#0B1B4F]">Dedicated Female & Male Faculty</h4>
-                <p className="text-[11px] text-slate-500 mt-0.5 leading-snug">
-                  Senior female nursing officers provide full comfort and personalized mentorship for female students.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* 4 Academic Department Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {facultyDepartments.map((f, idx) => (
-              <div key={idx} className="bg-white p-7 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center justify-between gap-2 mb-2">
-                    <span className="text-[10px] font-black uppercase tracking-wider text-[#0D7A68] bg-teal-50 px-2.5 py-1 rounded">
-                      {f.cadre}
-                    </span>
-                    <span className="text-xs font-bold text-slate-400">M.Phil / MS Standards</span>
-                  </div>
-
-                  <h3 className="text-lg font-black text-[#0B1B4F] mb-1.5">
-                    {f.dept}
-                  </h3>
-
-                  <div className="text-xs font-bold text-[#F59E0B] mb-3">
-                    Faculty Qualifications: {f.qualification}
-                  </div>
-
-                  <p className="text-xs text-slate-600 leading-relaxed mb-4">
-                    {f.description}
-                  </p>
-                </div>
-
-                <div className="pt-3 border-t border-slate-100 flex items-center gap-2 text-xs font-semibold text-slate-700">
-                  <CheckCircle2 className="w-4 h-4 text-[#0D7A68] flex-shrink-0" />
-                  <span>{f.femaleRatio}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-
-        </div>
-      </section>
-
-      {/* 5. DEDICATED FEMALE STUDENT PROTECTION & PARENTAL PEACE OF MIND */}
-      <section className="py-20 bg-gradient-to-br from-teal-900 via-[#071233] to-[#0B1B4F] text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
-            <div className="lg:col-span-7 space-y-6">
-              <span className="inline-flex items-center gap-2 bg-[#F59E0B] text-slate-950 px-3.5 py-1 rounded-full text-xs font-black uppercase tracking-wider shadow">
-                <Lock className="w-3.5 h-3.5" /> Special Message for Parents & Female Students
-              </span>
-
-              <h2 className="text-3xl sm:text-5xl font-black tracking-tight leading-tight">
-                A Secure, Respectful & Fully Protected Campus for Daughters
-              </h2>
-
-              <p className="text-slate-200 text-sm sm:text-base leading-relaxed">
-                In our society, nothing matters more than the honor, safety, and respect of our daughters. PIASS Kasur has enforced uncompromising security protocols and an ethical campus culture so female students can pursue professional medical degrees with total confidence.
-              </p>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                
-                <div className="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/20">
-                  <div className="w-8 h-8 rounded-lg bg-teal-400 text-slate-950 flex items-center justify-center font-black mb-2">
-                    <ShieldCheck className="w-5 h-5" />
-                  </div>
-                  <h4 className="font-bold text-sm text-white">Dedicated Female Common Rooms</h4>
-                  <p className="text-xs text-slate-300 mt-1">Spacious, private waiting halls and study areas reserved exclusively for female students.</p>
-                </div>
-
-                <div className="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/20">
-                  <div className="w-8 h-8 rounded-lg bg-amber-400 text-slate-950 flex items-center justify-center font-black mb-2">
-                    <Eye className="w-5 h-5" />
-                  </div>
-                  <h4 className="font-bold text-sm text-white">Female Proctors & Mentors</h4>
-                  <p className="text-xs text-slate-300 mt-1">Resident female teachers oversee student discipline, well-being, and grievance resolution.</p>
-                </div>
-
-                <div className="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/20">
-                  <div className="w-8 h-8 rounded-lg bg-teal-400 text-slate-950 flex items-center justify-center font-black mb-2">
-                    <Lock className="w-5 h-5" />
-                  </div>
-                  <h4 className="font-bold text-sm text-white">Zero Tolerance Policy</h4>
-                  <p className="text-xs text-slate-300 mt-1">Strict anti-harassment regulations and non-negotiable campus code of conduct enforced 24/7.</p>
-                </div>
-
-                <div className="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/20">
-                  <div className="w-8 h-8 rounded-lg bg-amber-400 text-slate-950 flex items-center justify-center font-black mb-2">
-                    <Video className="w-5 h-5" />
-                  </div>
-                  <h4 className="font-bold text-sm text-white">Controlled Gate Entry</h4>
-                  <p className="text-xs text-slate-300 mt-1">No unauthorized outsider can enter campus gates without computerized identity checks.</p>
-                </div>
-
-              </div>
-            </div>
-
-            <div className="lg:col-span-5 relative">
-              <div className="relative h-[440px] rounded-3xl overflow-hidden shadow-2xl border-4 border-white/20">
-                <Image
-                  src="/images/23.avif"
-                  alt="Female Nursing Students in Clinical Lab"
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent" />
-                <div className="absolute bottom-6 left-6 right-6 text-white">
-                  <span className="text-xs font-bold text-[#F59E0B] uppercase">Parental Trust</span>
-                  <div className="text-base font-black mt-0.5">Where Daughters Build Honorable Careers</div>
-                  <p className="text-xs text-slate-300 mt-1">Over 60% of our enrolled medical scholars are female students.</p>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-      </section>
-
-      {/* 6. SMART MULTIMEDIA CLASSROOMS & CLIMATE-CONTROLLED LEARNING */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
-            <div className="lg:col-span-6 space-y-6">
-              <span className="text-xs font-black uppercase tracking-widest text-[#0D7A68] bg-teal-50 px-3.5 py-1.5 rounded-full border border-teal-200">
-                Classroom Infrastructure
-              </span>
-
-              <h2 className="text-3xl sm:text-4xl font-black text-[#0B1B4F] tracking-tight leading-tight">
-                Bright, Ventilated (Hawadar) & Multimedia Smart Lecture Rooms
-              </h2>
-
-              <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-                A student cannot concentrate in dark, cramped, or suffocating rooms. Our purpose-built campus architecture ensures natural sunlight, cross-ventilation, and modern climate management so that neither severe summer heat nor winter cold disturbs lectures.
-              </p>
-
-              <div className="space-y-3.5 pt-2">
-                
-                <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-slate-50 border border-slate-200">
-                  <div className="w-9 h-9 rounded-xl bg-teal-100 text-[#0D7A68] flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <Video className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-sm text-[#0B1B4F]">High-Definition Video Projectors</h4>
-                    <p className="text-xs text-slate-500 mt-0.5">Ceiling-mounted HD multimedia projectors connected to faculty laptops display 3D anatomical animations, surgery videos, and live programming demos.</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-slate-50 border border-slate-200">
-                  <div className="w-9 h-9 rounded-xl bg-blue-100 text-blue-800 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <Building2 className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-sm text-[#0B1B4F]">Spacious & Cross-Ventilated Architecture</h4>
-                    <p className="text-xs text-slate-500 mt-0.5">High ceilings, wide windows, and cross-ventilation ensure constant fresh air circulation and bright daylight across all lecture halls.</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-slate-50 border border-slate-200">
-                  <div className="w-9 h-9 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <Clock className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-sm text-[#0B1B4F]">Strict Attendance & Automated Parent SMS</h4>
-                    <p className="text-xs text-slate-500 mt-0.5">Biometric student attendance is recorded daily. In case of unexcused absence, automated SMS notifications are dispatched immediately to parents.</p>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-
-            <div className="lg:col-span-6 relative">
-              <div className="relative h-[440px] rounded-3xl overflow-hidden shadow-xl border-4 border-slate-100">
-                <Image
-                  src="/images/24.avif"
-                  alt="Multimedia Lecture Hall"
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0B1B4F]/85 via-transparent to-transparent" />
-                <div className="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur-md p-4 rounded-2xl border border-slate-200">
-                  <div className="text-sm font-black text-[#0B1B4F]">Audio-Visual Smart Lecture Halls</div>
-                  <div className="text-xs text-slate-600 mt-0.5">Interactive multimedia teaching with focused student seating.</div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-      </section>
-
-      {/* 7. SEPARATE SPECIALIZED LABS: MEDICAL SIMULATION VS IT SOFTWARE */}
-      <section className="py-20 bg-slate-50 border-t border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="text-center max-w-3xl mx-auto mb-14">
-            <span className="text-xs font-black uppercase tracking-widest text-[#0D7A68] bg-teal-50 px-4 py-1.5 rounded-full border border-teal-200">
-              Hands-On Practicals
-            </span>
-            <h2 className="text-3xl sm:text-5xl font-black text-[#0B1B4F] tracking-tight mt-3">
-              Independent Healthcare & Computing Laboratories
-            </h2>
-            <p className="text-slate-600 text-xs sm:text-sm md:text-base mt-3">
-              We do not combine medical and computer labs. PIASS Kasur maintains completely separated, specialized experimental environments for clinical healthcare and IT development.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {labFacilities.map((lab, idx) => (
-              <div key={idx} className="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
-                <div>
-                  <div className="relative h-56 w-full overflow-hidden bg-slate-100">
-                    <Image
-                      src={lab.image}
-                      alt={lab.title}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
-                    <span className="absolute top-4 left-4 bg-[#0B1B4F] text-white text-[10px] font-black px-3 py-1 rounded-md shadow">
-                      {lab.category}
-                    </span>
-                    <h3 className="absolute bottom-3 left-4 right-4 text-white text-base font-black leading-snug">
-                      {lab.title}
-                    </h3>
-                  </div>
-
-                  <div className="p-6">
-                    <p className="text-xs text-slate-600 leading-relaxed mb-4">
-                      {lab.desc}
-                    </p>
-
-                    <ul className="space-y-2 text-xs font-semibold text-slate-800">
-                      {lab.points.map((p, i) => (
-                        <li key={i} className="flex items-center gap-2">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-[#0D7A68] flex-shrink-0" />
-                          <span>{p}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-
-                <div className="p-6 pt-0">
-                  <div className="text-[11px] font-bold text-[#0D7A68] bg-teal-50 p-2.5 rounded-xl border border-teal-100 text-center">
-                    ✓ Regular Practical Exam Demonstrations
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-        </div>
-      </section>
-
-      {/* 8. MEDICAL & ACADEMIC REFERENCE LIBRARY */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="bg-gradient-to-r from-slate-50 to-blue-50/40 rounded-3xl border border-slate-200 p-8 sm:p-12 lg:p-14">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-              
-              <div className="lg:col-span-7 space-y-5">
-                <span className="text-xs font-black uppercase tracking-widest text-[#0B1B4F] bg-blue-100 px-3.5 py-1.5 rounded-full">
-                  Learning Resource Center
-                </span>
-                
-                <h2 className="text-2xl sm:text-4xl font-black text-[#0B1B4F] tracking-tight leading-tight">
-                  Comprehensive Medical & Academic Reference Library
-                </h2>
-
-                <p className="text-slate-600 text-xs sm:text-sm md:text-base leading-relaxed">
-                  Our quiet, well-stocked central library provides thousands of volumes spanning international nursing editions, medical surgical guides, pharmacology manuals, and computer science textbooks. Students have access to quiet study carrels and digital academic materials.
-                </p>
-
-                <div className="grid grid-cols-2 gap-3 pt-2 text-xs font-bold text-slate-700">
-                  <div className="flex items-center gap-2 bg-white p-3 rounded-xl border border-slate-200/80">
-                    <BookOpen className="w-4 h-4 text-[#0D7A68]" />
-                    <span>International Nursing Textbooks</span>
-                  </div>
-                  <div className="flex items-center gap-2 bg-white p-3 rounded-xl border border-slate-200/80">
-                    <Laptop className="w-4 h-4 text-[#0B1B4F]" />
-                    <span>Computer Science & IT Handbooks</span>
-                  </div>
-                  <div className="flex items-center gap-2 bg-white p-3 rounded-xl border border-slate-200/80">
-                    <Award className="w-4 h-4 text-[#F59E0B]" />
-                    <span>Past NEBP & University Board Papers</span>
-                  </div>
-                  <div className="flex items-center gap-2 bg-white p-3 rounded-xl border border-slate-200/80">
-                    <Clock className="w-4 h-4 text-emerald-600" />
-                    <span>Quiet Individual Reading Desks</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="lg:col-span-5 relative">
-                <div className="relative h-72 sm:h-80 rounded-2xl overflow-hidden shadow-xl border-4 border-white">
-                  <Image
-                    src="/images/20.avif"
-                    alt="Campus Library"
-                    fill
-                    className="object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0B1B4F]/80 via-transparent to-transparent" />
-                  <span className="absolute bottom-4 left-4 right-4 text-white text-xs font-bold">
-                    Knowledge Hub: Continuous Study & Research Environment
-                  </span>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      {/* 9. CAMPUS UTILITIES: GENERATOR / UPS, 24/7 CCTV & MINERAL RO WATER */}
-      <section className="py-20 bg-slate-50 border-t border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="text-center max-w-3xl mx-auto mb-14">
-            <span className="text-xs font-black uppercase tracking-widest text-[#0D7A68] bg-teal-50 px-4 py-1.5 rounded-full border border-teal-200">
-              Uninterrupted Operations
-            </span>
-            <h2 className="text-3xl sm:text-5xl font-black text-[#0B1B4F] tracking-tight mt-3">
-              Reliable Utilities & Campus Security Systems
-            </h2>
-            <p className="text-slate-600 text-xs sm:text-sm md:text-base mt-3">
-              Power cuts or hygiene issues can compromise study hours. We maintain industrial infrastructure to ensure continuous, worry-free education.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            
-            {/* Generator / UPS */}
-            <div className="bg-white p-7 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
-              <div>
-                <div className="w-11 h-11 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center mb-4">
-                  <Zap className="w-6 h-6" />
-                </div>
-                <h3 className="text-lg font-black text-[#0B1B4F] mb-2">
-                  Heavy Generator & Central UPS
-                </h3>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  Dual-layer backup power system. Automatic commercial diesel generator paired with an uninterrupted UPS network guarantees that coding practicals, video lectures, and exams never pause during city load-shedding.
-                </p>
-              </div>
-              <div className="mt-5 pt-3 border-t border-slate-100 text-[11px] font-bold text-amber-700">
-                ✓ 100% Zero Power Interruption
-              </div>
-            </div>
-
-            {/* 24/7 CCTV Cameras */}
-            <div className="bg-white p-7 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
-              <div>
-                <div className="w-11 h-11 rounded-2xl bg-teal-100 text-[#0D7A68] flex items-center justify-center mb-4">
-                  <Video className="w-6 h-6" />
-                </div>
-                <h3 className="text-lg font-black text-[#0B1B4F] mb-2">
-                  Complete CCTV Camera Coverage
-                </h3>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  High-resolution surveillance cameras cover all corridors, main gates, computer laboratories, and perimeter boundaries. The live feeds are supervised by the administrative security control room.
-                </p>
-              </div>
-              <div className="mt-5 pt-3 border-t border-slate-100 text-[11px] font-bold text-[#0D7A68]">
-                ✓ Monitored Campus Discipline
-              </div>
-            </div>
-
-            {/* Clean RO Water */}
-            <div className="bg-white p-7 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
-              <div>
-                <div className="w-11 h-11 rounded-2xl bg-blue-100 text-blue-800 flex items-center justify-center mb-4">
-                  <Droplet className="w-6 h-6" />
-                </div>
-                <h3 className="text-lg font-black text-[#0B1B4F] mb-2">
-                  Multi-Stage RO Mineral Drinking Water
-                </h3>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  Health begins with pure water. Our campus is equipped with an industrial Reverse Osmosis (RO) filtration plant with electric water chillers, providing lab-tested, hygienic drinking water across all floors.
-                </p>
-              </div>
-              <div className="mt-5 pt-3 border-t border-slate-100 text-[11px] font-bold text-blue-800">
-                ✓ Pure, Filtered & Chilled Water
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-      </section>
-
-      {/* 10. DEDICATED SUPPORT, SECURITY & SANITATION STAFF */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="max-w-3xl mb-12">
-            <span className="text-xs font-black uppercase tracking-widest text-[#0D7A68] bg-teal-50 px-3.5 py-1.5 rounded-full border border-teal-200">
-              Campus Operations & Support
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-black text-[#0B1B4F] tracking-tight mt-3">
-              Committed Security, Housekeeping & Technical Staff
-            </h2>
-            <p className="text-slate-600 text-xs sm:text-sm mt-2">
-              Beyond professors, a dedicated operations team works quietly every day to ensure cleanliness, safety, and rapid resolution of campus issues.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            
-            <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200">
-              <div className="w-9 h-9 rounded-xl bg-teal-100 text-[#0D7A68] flex items-center justify-center font-black mb-3">
-                <ShieldCheck className="w-5 h-5" />
-              </div>
-              <h3 className="font-extrabold text-sm sm:text-base text-[#0B1B4F]">Trained Gate Security Guards</h3>
-              <p className="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                Courteous yet vigilant uniformed security personnel stationed at entry and exit gates, performing visitor verification, student bag inspection, and perimeter safety.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200">
-              <div className="w-9 h-9 rounded-xl bg-blue-100 text-blue-800 flex items-center justify-center font-black mb-3">
-                <HeartHandshake className="w-5 h-5" />
-              </div>
-              <h3 className="font-extrabold text-sm sm:text-base text-[#0B1B4F]">Active Housekeeping & Sanitation</h3>
-              <p className="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                Full-time sanitation staff performing continuous floor sweeping, dust sanitization of laboratories, and strict hygiene maintenance of student washrooms.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200">
-              <div className="w-9 h-9 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-black mb-3">
-                <Zap className="w-5 h-5" />
-              </div>
-              <h3 className="font-extrabold text-sm sm:text-base text-[#0B1B4F]">Rapid Technical & Electrical Team</h3>
-              <p className="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                On-campus electricians, plumbers, and network technicians who swiftly address any water dispenser, generator, projector, or computer workstation requirement.
-              </p>
-            </div>
-
-          </div>
-
-        </div>
-      </section>
-
-      {/* 11. STUDENT HOLISTIC GROWTH & CHARACTER BUILDING */}
-      <section className="py-16 bg-slate-50 border-t border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-3xl">
-          <span className="text-xs font-black uppercase tracking-widest text-[#0D7A68]">Character & Ethics</span>
-          <h2 className="text-2xl sm:text-4xl font-black text-[#0B1B4F] tracking-tight mt-2">
-            Beyond Degrees: Character, Compassion & Ethical Leadership
-          </h2>
-          <p className="text-slate-600 text-xs sm:text-sm mt-3 leading-relaxed">
-            Healthcare is built on empathy. Our students participate in clinical ethics workshops, hospital orientation sessions, personality grooming, and emergency life-support drills to emerge as responsible citizens of Pakistan.
+        {/* Intro Paragraph Below Hero Photo */}
+        <div className="max-w-6xl mx-auto px-6 sm:px-8 py-10 sm:py-14">
+          <p className="text-base sm:text-lg text-gray-800 leading-relaxed max-w-5xl font-normal">
+            At PIASS College of Nursing & Sciences Kasur, we prioritise your academic journey, offering certified healthcare and degree education, supportive environment, and opportunities to grow academically and personally. Your success drives our commitment to clinical excellence, medical ethics, and community impact.
           </p>
         </div>
       </section>
 
-      {/* 12. CALL TO ACTION / VISIT KASUR CAMPUS */}
-      <section className="bg-gradient-to-r from-[#071233] to-[#0B1B4F] text-white py-16 border-t-4 border-[#0D7A68]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-8">
-          <div>
-            <span className="text-xs font-bold text-[#F59E0B] uppercase tracking-wider">Experience PIASS in Person</span>
-            <h3 className="text-2xl sm:text-4xl font-black mt-1">Visit Our Campus on Main Ferozpur Road</h3>
-            <p className="text-xs sm:text-sm text-slate-300 mt-1.5 max-w-xl">
-              Opposite New Bus Terminal Kasur. Meet the Directorate, inspect our clinical simulation and IT labs, and discuss admissions with faculty counselors.
+      {/* ========================================================
+          2. OUR VISION (2-Column: Left Image, Right Vision + Quote Mark)
+         ======================================================== */}
+      <section className="max-w-6xl mx-auto px-6 sm:px-8 py-8 sm:py-14 border-t border-gray-100">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          
+          {/* Left Column: Campus Building Image */}
+          <div className="lg:col-span-6 relative h-[280px] sm:h-[380px] w-full overflow-hidden rounded-sm shadow-sm">
+            <Image
+              src="/images/19.avif"
+              alt="PIASS Academic Vision"
+              fill
+              className="object-cover"
+            />
+          </div>
+
+          {/* Right Column: Large Quote Mark + "Our Vision" */}
+          <div className="lg:col-span-6 space-y-4">
+            <div className="text-7xl sm:text-8xl font-serif text-[#d6d6d6] leading-none select-none -mb-6">
+              “
+            </div>
+            <h2 className="font-serif text-3xl sm:text-5xl text-[#1e1e1e] font-normal tracking-tight">
+              Our Vision
+            </h2>
+            <p className="text-sm sm:text-base text-gray-700 leading-relaxed font-normal pt-2">
+              To become a premier healthcare and degree-awarding collegiate institution in Punjab, characterised by its clinical excellence, ethical hospital practice, and contribution to society through 21<sup>ST</sup> CENTURY SKILL-CENTRED Healthcare, Nursing, Computing Education, and Research.
             </p>
           </div>
-          <div className="flex flex-wrap items-center gap-4">
-            <a
-              href={`tel:${collegeInfo.phoneNumbers[0]}`}
-              className="inline-flex items-center gap-2 bg-[#F59E0B] hover:bg-amber-600 text-slate-950 font-black text-xs sm:text-sm px-6 py-4 rounded-xl shadow-lg transition-all"
-            >
-              <PhoneCall className="w-4 h-4" />
-              <span>Call Helpline</span>
-            </a>
+
+        </div>
+      </section>
+
+      {/* ========================================================
+          3. OUR MISSION (2-Column: Left Quote + 5 Cards, Right Tall Image)
+         ======================================================== */}
+      <section className="max-w-6xl mx-auto px-6 sm:px-8 py-10 sm:py-16 border-t border-gray-100">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+          
+          {/* Left Column: Large Quote Mark + Mission + 5 Stacked Boxed Cards */}
+          <div className="lg:col-span-7 space-y-5">
+            <div className="text-7xl sm:text-8xl font-serif text-[#d6d6d6] leading-none select-none -mb-6">
+              “
+            </div>
+            
+            <h2 className="font-serif text-3xl sm:text-5xl text-[#1e1e1e] font-normal tracking-tight">
+              Our Mission
+            </h2>
+
+            <p className="text-xs sm:text-sm text-gray-600 leading-relaxed pb-2">
+              PIASS College of Nursing & Sciences Kasur strives to achieve the following mission goals in pursuance of our institutional vision:
+            </p>
+
+            {/* 5 Distinct Stacked Cards (Matching UOL Exact Boxes) */}
+            <div className="space-y-3.5">
+              <div className="border border-gray-200 bg-white p-4 sm:p-5 rounded-md text-xs sm:text-sm text-gray-800 shadow-sm leading-relaxed">
+                Pursue and deliver academic and clinical excellence in every aspect of our healthcare, nursing, and degree endeavours.
+              </div>
+
+              <div className="border border-gray-200 bg-white p-4 sm:p-5 rounded-md text-xs sm:text-sm text-gray-800 shadow-sm leading-relaxed">
+                Produce certified nursing officers, technologists, and graduates to become future-ready leaders through hands-on bedside hospital training and lifelong learning experience.
+              </div>
+
+              <div className="border border-gray-200 bg-white p-4 sm:p-5 rounded-md text-xs sm:text-sm text-gray-800 shadow-sm leading-relaxed">
+                Reinforce the culture of compassionate patient care, medical ethics, practical computing research, and healthcare innovation.
+              </div>
+
+              <div className="border border-gray-200 bg-white p-4 sm:p-5 rounded-md text-xs sm:text-sm text-gray-800 shadow-sm leading-relaxed">
+                Improve the sustainability of the healthcare ecosystem, ensuring social responsibility and healthcare accessibility for every stratum of society.
+              </div>
+
+              <div className="border border-gray-200 bg-white p-4 sm:p-5 rounded-md text-xs sm:text-sm text-gray-800 shadow-sm leading-relaxed">
+                Promote global flow of nursing skills, professional licensing opportunities, and technological expertise through accredited education.
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column: Tall Campus Architecture Photo */}
+          <div className="lg:col-span-5 relative h-[440px] sm:h-[580px] w-full overflow-hidden rounded-sm shadow-sm mt-4 lg:mt-12">
+            <Image
+              src="/images/24.avif"
+              alt="PIASS Medical Campus"
+              fill
+              className="object-cover"
+            />
+          </div>
+
+        </div>
+      </section>
+
+      {/* ========================================================
+          4. LEADERSHIP 1: CHAIRMAN'S PHILOSOPHY (Black Shalwar Kameez: /images/ceo.jpg)
+         ======================================================== */}
+      <section className="max-w-6xl mx-auto px-6 sm:px-8 py-12 sm:py-20 border-t border-gray-200">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+          
+          {/* Left Column: Quote Mark + Text + Name + Designation */}
+          <div className="lg:col-span-7 space-y-5 order-2 lg:order-1">
+            <div className="text-7xl sm:text-8xl font-serif text-[#d6d6d6] leading-none select-none -mb-6">
+              “
+            </div>
+
+            <h2 className="font-serif text-3xl sm:text-5xl text-[#1e1e1e] font-normal tracking-tight">
+              Chairman’s Philosophy
+            </h2>
+
+            <p className="text-xs sm:text-sm text-gray-700 leading-relaxed font-normal italic">
+              “As we shape the future, we aim to provide our students with the tools to excel and make a meaningful impact. At PIASS College of Nursing & Sciences, education is the foundation for sustainable healthcare development, and it is our mission to equip every student with the knowledge and clinical skills to lead with integrity, compassion, and innovation.”
+            </p>
+
+            <div className="pt-2">
+              <div className="font-serif text-lg sm:text-xl text-[#1e1e1e] font-semibold">
+                M.YAQOOB KHAN
+              </div>
+              <div className="text-xs sm:text-sm text-gray-500 font-medium mt-0.5">
+                Chairman, PIASS College of nursing  Kasur
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column: 🎯 REAL PORTRAIT OF CHAIRMAN (Black Shalwar Kameez) */}
+          <div className="lg:col-span-5 relative h-[380px] sm:h-[460px] w-full bg-gray-50 overflow-hidden rounded-sm shadow-sm order-1 lg:order-2">
+            <Image
+              src="/images/ceo.jpeg"
+              alt="Chairman, Board of Governors"
+              fill
+              className="object-cover object-top"
+            />
+          </div>
+
+        </div>
+      </section>
+
+      {/* ========================================================
+          DARK CALLOUT BANNER 1 (Full-Width Charcoal Banner)
+         ======================================================== */}
+      <section className="bg-[#1c1c1c] text-white py-12 sm:py-16 px-6">
+        <div className="max-w-4xl mx-auto text-center space-y-5">
+          <p className="text-sm sm:text-base md:text-lg text-slate-200 font-light leading-relaxed">
+            PIASS College Kasur is committed to making a positive impact through certified healthcare training, supporting community hospital initiatives, and driving sustainable professional progress.
+          </p>
+
+          <div>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 bg-[#0D7A68] hover:bg-teal-600 text-white font-bold text-xs sm:text-sm px-6 py-4 rounded-xl shadow-md transition-all"
+              className="inline-flex items-center gap-2 text-xs sm:text-sm text-white hover:text-amber-400 font-medium transition-colors group"
             >
-              <span>Get Location & Directions</span>
-              <ArrowRight className="w-4 h-4" />
+              <span>Be part of our community</span>
+              <span className="w-6 h-6 rounded-full border border-white/40 flex items-center justify-center group-hover:border-amber-400 transition-colors">
+                <ArrowRight className="w-3 h-3" />
+              </span>
             </Link>
           </div>
         </div>
+      </section>
+
+      {/* ========================================================
+          5. LEADERSHIP 2: DIRECTOR'S MISSION (Blue Suit: /images/director.jpg)
+         ======================================================== */}
+      <section className="max-w-6xl mx-auto px-6 sm:px-8 py-12 sm:py-20">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+          
+          {/* Left Column:  REAL PORTRAIT OF DIRECTOR (Blue Suit) */}
+          <div className="lg:col-span-5 relative h-[380px] sm:h-[460px] w-full bg-gray-50 overflow-hidden rounded-sm shadow-sm">
+            <Image
+              src="/images/director.jpeg"
+              alt="Managing Director, PIASS College"
+              fill
+              className="object-cover object-top"
+            />
+          </div>
+
+          {/* Right Column: Quote Mark + Title + Quote + Designation (Alternating Layout!) */}
+          <div className="lg:col-span-7 space-y-5">
+            <div className="text-7xl sm:text-8xl font-serif text-[#d6d6d6] leading-none select-none -mb-6">
+              “
+            </div>
+
+            <h2 className="font-serif text-3xl sm:text-5xl text-[#1e1e1e] font-normal tracking-tight">
+              Director’s Mission
+            </h2>
+
+            <p className="text-xs sm:text-sm text-gray-700 leading-relaxed font-normal italic">
+              “At PIASS College of Nursing Kasur, our mission is to create an inclusive, dynamic clinical learning environment where students are empowered to thrive academically and professionally. We are committed to delivering innovative healthcare and computing education that prepares them for the challenges of the future, ensuring they acquire both technical bedside expertise and the critical decision-making skills needed to make a meaningful impact in their respective fields.”
+            </p>
+
+            <div className="pt-2">
+              <div className="font-serif text-lg sm:text-xl text-[#1e1e1e] font-semibold">
+                M.HASEEB 
+              </div>
+              <div className="text-xs sm:text-sm text-gray-500 font-medium mt-0.5">
+                Managing Director & Academic Operations Head • PIASS Kasur
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ========================================================
+          DARK ACCREDITATIONS & RANKINGS BANNER (Matching UOL Video 00:14)
+         ======================================================== */}
+      <section className="bg-[#1c1c1c] text-white py-14 sm:py-18 px-6">
+        <div className="max-w-5xl mx-auto space-y-8">
+          
+          {/* 3 White Ranking Cards (Exact UOL Style) */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+            
+            {/* Card 1 */}
+            <div className="bg-white text-[#1c1c1c] p-6 rounded-sm shadow-sm flex flex-col justify-between h-36">
+              <div className="flex items-center gap-2 text-emerald-800 font-black text-sm">
+                <ShieldCheck className="w-5 h-5 text-emerald-700" />
+                <span>PNMC Islamabad</span>
+              </div>
+              <div>
+                <div className="text-xl sm:text-2xl font-black text-[#1c1c1c]">100% Accredited</div>
+                <div className="text-[11px] text-gray-500 mt-0.5">Pakistan Nursing & Midwifery Council</div>
+              </div>
+            </div>
+
+            {/* Card 2 */}
+            <div className="bg-white text-[#1c1c1c] p-6 rounded-sm shadow-sm flex flex-col justify-between h-36">
+              <div className="flex items-center gap-2 text-[#0B1B4F] font-black text-sm">
+                <Award className="w-5 h-5 text-amber-500" />
+                <span>NEBP Punjab</span>
+              </div>
+              <div>
+                <div className="text-xl sm:text-2xl font-black text-[#1c1c1c]">Registered Board</div>
+                <div className="text-[11px] text-gray-500 mt-0.5">Nursing Examination Board Punjab</div>
+              </div>
+            </div>
+
+            {/* Card 3 */}
+            <div className="bg-white text-[#1c1c1c] p-6 rounded-sm shadow-sm flex flex-col justify-between h-36">
+              <div className="flex items-center gap-2 text-gray-900 font-black text-sm">
+                <GraduationCap className="w-5 h-5 text-blue-700" />
+                <span>HEC Universities</span>
+              </div>
+              <div>
+                <div className="text-xl sm:text-2xl font-black text-[#1c1c1c]">Degree Affiliated</div>
+                <div className="text-[11px] text-gray-500 mt-0.5">University of Education & IUB</div>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Link Below Cards */}
+          <div className="text-center pt-2">
+            <Link
+              href="/programs"
+              className="inline-flex items-center gap-2 text-xs sm:text-sm text-white hover:text-amber-400 font-medium transition-colors group"
+            >
+              <span>See all our accreditations</span>
+              <span className="w-6 h-6 rounded-full border border-white/40 flex items-center justify-center group-hover:border-amber-400 transition-colors">
+                <ArrowRight className="w-3 h-3" />
+              </span>
+            </Link>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ========================================================
+          6. STRATEGY SECTION (2-Column: Left Text, Right Lab Photo)
+         ======================================================== */}
+      <section className="max-w-6xl mx-auto px-6 sm:px-8 py-12 sm:py-20 border-t border-gray-100">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+          
+          {/* Left Column: "PIASS's Strategy" */}
+          <div className="lg:col-span-6 space-y-4">
+            <h2 className="font-serif text-3xl sm:text-5xl text-[#1e1e1e] font-normal tracking-tight">
+              PIASS’s Strategy
+            </h2>
+            <p className="text-sm sm:text-base text-gray-700 leading-relaxed font-normal pt-2">
+              PIASS College of Nursing & Sciences Kasur focuses on innovative clinical education, hospital bedside excellence, modern programming laboratories, and disciplined practices to prepare students for national and global healthcare and technological challenges.
+            </p>
+          </div>
+
+          {/* Right Column: Large Photo */}
+          <div className="lg:col-span-6 relative h-[280px] sm:h-[380px] w-full overflow-hidden rounded-sm shadow-sm">
+            <Image
+              src="/images/18.avif"
+              alt="PIASS Clinical Strategy"
+              fill
+              className="object-cover"
+            />
+          </div>
+
+        </div>
+      </section>
+
+      {/* ========================================================
+          DARK CALLOUT BANNER 2 (Contact Assistance)
+         ======================================================== */}
+      <section className="bg-[#1c1c1c] text-white py-12 sm:py-16 px-6">
+        <div className="max-w-4xl mx-auto text-center space-y-5">
+          <p className="text-sm sm:text-base md:text-lg text-slate-200 font-light leading-relaxed">
+            Contact us for personalised assistance and expert support. Our academic counseling team is ready to help with any enquiries you may have.
+          </p>
+
+          <div>
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 text-xs sm:text-sm text-white hover:text-amber-400 font-medium transition-colors group"
+            >
+              <span>Visit our campus</span>
+              <span className="w-6 h-6 rounded-full border border-white/40 flex items-center justify-center group-hover:border-amber-400 transition-colors">
+                <ArrowRight className="w-3 h-3" />
+              </span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================================
+          7. PIASS THROUGH THE YEARS (Timeline Carousel - Video 00:22)
+         ======================================================== */}
+      <section className="max-w-6xl mx-auto px-6 sm:px-8 py-16 sm:py-24">
+        
+        <h2 className="font-serif text-3xl sm:text-5xl text-[#1e1e1e] font-normal tracking-tight mb-8">
+          PIASS through the Years
+        </h2>
+
+        {/* Top Split: Left Active Text, Right Active Milestone Photo */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-12">
+          
+          <div className="lg:col-span-6 space-y-4">
+            <div className="font-serif text-3xl sm:text-4xl text-[#0B1B4F] font-normal">
+              {milestones[activeYearIndex].year} — {milestones[activeYearIndex].title}
+            </div>
+            <p className="text-sm sm:text-base text-gray-700 leading-relaxed font-normal">
+              {milestones[activeYearIndex].desc}
+            </p>
+          </div>
+
+          <div className="lg:col-span-6 relative h-[260px] sm:h-[340px] w-full overflow-hidden rounded-sm shadow-sm bg-gray-100">
+            <Image
+              src={milestones[activeYearIndex].image}
+              alt={milestones[activeYearIndex].title}
+              fill
+              className="object-cover"
+            />
+          </div>
+
+        </div>
+
+        {/* Bottom Horizontal Timeline with clickable points and next/prev arrows */}
+        <div className="relative border-t border-gray-300 pt-6 flex items-center justify-between">
+          
+          <div className="flex items-center gap-8 sm:gap-14 overflow-x-auto py-2">
+            {milestones.map((item, idx) => (
+              <button
+                key={idx}
+                onClick={() => setActiveYearIndex(idx)}
+                className={`flex flex-col items-center gap-2 transition-all cursor-pointer group flex-shrink-0`}
+              >
+                <span className={`text-xs sm:text-sm font-semibold ${
+                  activeYearIndex === idx ? "text-slate-950 font-bold" : "text-gray-400 group-hover:text-gray-700"
+                }`}>
+                  {item.year}
+                </span>
+                
+                {/* Timeline circle node */}
+                <span className={`w-3 h-3 rounded-full border-2 transition-all ${
+                  activeYearIndex === idx 
+                    ? "bg-slate-900 border-slate-900 scale-125" 
+                    : "bg-white border-gray-300 group-hover:border-gray-500"
+                }`} />
+              </button>
+            ))}
+          </div>
+
+          {/* Timeline Arrows */}
+          <div className="flex items-center gap-2 pl-4 flex-shrink-0">
+            <button
+              onClick={() => setActiveYearIndex(prev => prev > 0 ? prev - 1 : milestones.length - 1)}
+              className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition-colors"
+              aria-label="Previous milestone"
+            >
+              <ChevronLeft className="w-4 h-4 text-gray-700" />
+            </button>
+            <button
+              onClick={() => setActiveYearIndex(prev => prev < milestones.length - 1 ? prev + 1 : 0)}
+              className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition-colors"
+              aria-label="Next milestone"
+            >
+              <ChevronRight className="w-4 h-4 text-gray-700" />
+            </button>
+          </div>
+
+        </div>
+
       </section>
 
     </div>
