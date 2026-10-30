@@ -18,12 +18,26 @@ export const metadata = {
     "Islamia University Bahawalpur affiliated colleges in Kasur"
   ],
   authors: [{ name: "PIASS College Kasur" }],
-  viewport: "width=device-width, initial-scale=1",
+  // 🎯 1. METADATA MEIN ICON CONNECT HO GAYA:
+  icons: {
+    icon: "/favicon.jpeg?v=3",
+    shortcut: "/favicon.jpeg?v=3",
+    apple: "/favicon.jpeg?v=3",
+  },
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        {/* 🎯 2. BROWSER KE LIYE DIRECT LINK (Kabhi fail nahi hoga) */}
+        <link rel="icon" href="/favicon.jpeg?v=3" type="image/jpeg" />
+      </head>
       <body className="min-h-screen flex flex-col font-sans antialiased bg-white selection:bg-[#0D7A68] selection:text-white">
         <TopBar />
         <Navbar />

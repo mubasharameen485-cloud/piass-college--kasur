@@ -200,8 +200,80 @@ export const programsData = [
     description: "Focused training on functional English, spoken proficiency, linguistics, and literature essentials.",
     highlights: ["Spoken English Fluency", "Direct Entry to BS English 5th Sem", "Grammar & Academic Writing"],
     badgeColor: "bg-indigo-700"
+  },
+
+
+
+
+
+// 🎯 6. POST ADP PROGRAMS (Flyer Ke Mutabiq 100% Data Added!)
+  {
+    slug: "post-adp-cs",
+    id: "post-adp-cs",
+    title: "Post ADP BS Computer Science",
+    category: "Post ADP Programs",
+    categorySlug: "post-adp",
+    duration: "2 Years (5th to 8th Semester)",
+    eligibility: "ADP in Computer Science / IT / Equivalent 14-year education with 2.0+ CGPA or 45% marks.",
+    recognizedBy: "University of Education / IUB & HEC",
+    description: "Bridge program converting your 2-year Associate Degree into a full-fledged 16-year BS Computer Science degree.",
+    seats: "30 Seats",
+    scope: "Full-Stack Software Engineer, AI Developer, Cloud Architect, Eligible for MS/MPhil & Grade-17 Government Jobs.",
+    highlights: [
+      "Direct Lateral Admission into 5th Semester BSCS",
+      "Saves 2 Years by Utilizing Prior ADP Credits",
+      "Hands-on Software Development & AI Project Work",
+      "Complete 16-Year HEC Recognized Bachelor Degree"
+    ],
+    subjects: ["Advanced Algorithms", "Artificial Intelligence", "Final Year Capstone Project", "Distributed Databases", "Web Frameworks"]
+  },
+  {
+    slug: "post-adp-bba",
+    id: "post-adp-bba",
+    title: "Post ADP BBA (Business Administration)",
+    category: "Post ADP Programs",
+    categorySlug: "post-adp",
+    duration: "2 Years (5th to 8th Semester)",
+    eligibility: "ADP in Business / Commerce / Equivalent 14-year degree with minimum 45% marks.",
+    recognizedBy: "University of Education / IUB & HEC",
+    description: "Lateral entry program upgrading 2-year business and commerce diplomas into an official 16-year BBA degree.",
+    seats: "30 Seats",
+    scope: "Corporate Banking, Financial Management, Marketing Lead, Supply Chain Executive, Eligible for MBA / MS Programs.",
+    highlights: [
+      "Direct 5th Semester Admission for ADP / B.Com Graduates",
+      "Upgrades Credential to Full 16-Year BBA Degree",
+      "Corporate Finance & Strategic Marketing Modules",
+      "High Corporate Employability in Banking & Multinational Firms"
+    ],
+    subjects: ["Corporate Finance", "Strategic Marketing", "Business Analytics", "Operations Management", "Business Research"]
+  },
+  {
+    slug: "post-adp-english",
+    id: "post-adp-english",
+    title: "Post ADP BS English (Language & Literature)",
+    category: "Post ADP Programs",
+    categorySlug: "post-adp",
+    duration: "2 Years (5th to 8th Semester)",
+    eligibility: "ADP in English / Arts / Humanities with minimum 45% marks.",
+    recognizedBy: "University of Education / IUB & HEC",
+    description: "Bridge program upgrading 2-year Associate Degree into a full 4-year (16-Year equivalent) BS English degree.",
+    seats: "30 Seats",
+    scope: "College Lecturer, CSS/PMS Competitive Exams, Content Strategist, Public Relations Officer, Eligible for MPhil English.",
+    highlights: [
+      "Direct Lateral Transition into BS English 5th Semester",
+      "Special Focus on CSS / PMS Competitive Syllabus",
+      "Advanced Linguistics & Modern Research Methodologies",
+      "Eligible for Government College Lecturer PPSC Exams"
+    ],
+    subjects: ["Applied Linguistics", "Literary Theory", "Post-Colonial Literature", "Research Thesis", "Stylistics"]
   }
 ];
+
+
+
+
+
+
 
 // Slider data for Hero Section
 export const heroSlidesData = [
