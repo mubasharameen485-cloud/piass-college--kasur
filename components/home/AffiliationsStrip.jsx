@@ -4,7 +4,7 @@ import React from "react";
 import Image from "next/image";
 
 export default function AffiliationsStrip() {
-  
+  // 🎯 Kul 6 Official Accreditations
   const affiliations = [
     {
       name: "PNMC Islamabad",
@@ -20,7 +20,7 @@ export default function AffiliationsStrip() {
     },
     {
       name: "Govt. of Punjab",
-      title: "Health & Education Department",
+      title: "Health & Education Department, Government of Punjab",
       image: "/logos/punjab-govt.jpeg",
       fallback: "/logos/punjab-govt.png"
     },
@@ -38,19 +38,19 @@ export default function AffiliationsStrip() {
     },
     {
       name: "E-ROZGAR",
-      title: "E-ROZGAR",
+      title: "E-ROZGAR Training Program",
       image: "/images/26.jpeg", 
       fallback: "/images/26.jpeg"
     }
   ];
 
-  // Infinite smooth loop ke liye list ko repeat kiya gaya hai
-  const scrollList = [...affiliations, ...affiliations, ...affiliations];
+  // 🎯 Sirf 2 sets (6 + 6) taake double/bheed feel na ho aur 6th ke baad 1st aaye
+  const scrollList = [...affiliations, ...affiliations];
 
   return (
-    <section className="py-8 bg-slate-50/80 border-b border-slate-200 overflow-hidden">
+    <section className="py-10 sm:py-12 bg-slate-50/70 border-b border-slate-200 overflow-hidden">
       
-      {/* ⚡ Pure CSS High-Performance Infinite Loop Animation */}
+      {/* ⚡ Pure CSS Smooth Marquee (Speed 20s: Thori Tez Aur Smooth) */}
       <style dangerouslySetInnerHTML={{ __html: `
         @keyframes continuousMarquee {
           0% { transform: translateX(0); }
@@ -59,7 +59,7 @@ export default function AffiliationsStrip() {
         .animate-logos-slider {
           display: flex;
           width: max-content;
-          animation: continuousMarquee 28s linear infinite;
+          animation: continuousMarquee 20s linear infinite;
           will-change: transform;
         }
         .animate-logos-slider:hover {
@@ -67,52 +67,43 @@ export default function AffiliationsStrip() {
         }
       `}} />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-5 text-center">
+      {/* Section Header */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8 text-center">
         <span className="text-[11px] font-black uppercase tracking-widest text-[#0D7A68] bg-teal-50 px-3.5 py-1 rounded-full border border-teal-200">
           Recognized & Approved Affiliations
         </span>
         <h2 className="text-xl sm:text-2xl font-black text-[#0B1B4F] mt-2">
-          Degrees & Diplomas Accredited by National & Provincial Councils
+          Degrees & Diplomas Accredited by National & Provincial Regulatory Bodies
         </h2>
       </div>
 
-      {/* 🚀 MOVABLE CONTINUOUS LOGOS STRIP */}
-      <div className="relative w-full overflow-hidden">
+      {/* 🚀 MOVING LOGOS TRACK */}
+      <div className="relative w-full overflow-hidden py-2">
         
         {/* Left & Right Smooth Edge Fade Masks */}
-        <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-slate-50 to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-slate-50 to-transparent z-10 pointer-events-none" />
+        <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-28 bg-gradient-to-r from-slate-50 via-slate-50/90 to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-28 bg-gradient-to-l from-slate-50 via-slate-50/90 to-transparent z-10 pointer-events-none" />
 
-        {/* Moving Slider Track */}
-        <div className="animate-logos-slider flex items-center gap-5 py-2">
+        {/* 🎯 Gap barha diya hai taake logos khulay khulay dikhein */}
+        <div className="animate-logos-slider flex items-center gap-12 sm:gap-16 lg:gap-20">
           {scrollList.map((item, idx) => (
             <div
               key={idx}
-              className="flex items-center gap-3 bg-white px-4 py-2.5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow flex-shrink-0 cursor-default"
+              title={`${item.name} — ${item.title}`}
+              className="group relative flex items-center justify-center cursor-pointer flex-shrink-0"
             >
-              {/* 🎯 BALANCED LOGO SIZE (Na bara na chota: 42px x 42px) */}
-              <div className="w-11 h-11 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center p-1 overflow-hidden flex-shrink-0">
+              {/* 🎯 SIZE INCREASED: 100px - 112px (Ab chota bilkul feel nahi hoga) */}
+              <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-white border-2 border-slate-200/90 shadow-sm group-hover:shadow-xl group-hover:border-[#0D7A68] flex items-center justify-center p-4 transition-all duration-300 group-hover:scale-105">
                 <img
                   src={item.image}
                   alt={item.name}
-                  className="max-h-full max-w-full object-contain"
+                  className="max-h-full max-w-full object-contain filter group-hover:brightness-105 transition-all"
                   onError={(e) => {
-                    // Agar .jpeg na mile toh fallback try kare
                     if (item.fallback && e.target.src !== item.fallback) {
                       e.target.src = item.fallback;
                     }
                   }}
                 />
-              </div>
-
-              {/* Text Info */}
-              <div className="text-left pr-2">
-                <div className="font-extrabold text-[#0B1B4F] text-xs leading-tight">
-                  {item.name}
-                </div>
-                <div className="text-[10px] text-slate-500 font-medium leading-tight mt-0.5 max-w-[190px] truncate">
-                  {item.title}
-                </div>
               </div>
             </div>
           ))}
@@ -122,4 +113,4 @@ export default function AffiliationsStrip() {
 
     </section>
   );
-}
+}g

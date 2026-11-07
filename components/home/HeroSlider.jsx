@@ -27,15 +27,14 @@ export default function HeroSlider() {
 
   return (
     /* =========================================================================
-       🎯 1. BALANCED SLIDER HEIGHT (Natural, Edge-to-Edge & No Distortion):
+       🎯 IS NAYE BANNER KE EXACT RATIO (1920x750) KE MUTABIQ SETTING:
        
-       - Height: "h-[280px] sm:h-[380px] md:h-[480px] lg:h-[580px] xl:h-[620px]"
-         (Is height par image stretch nahi hoti, aur screen par left-to-right poori aati hai)
-         
-       - Agar aapko thori aur barhani ho:  "lg:h-[620px]"
-       - Agar aapko thori kam karni ho:     "lg:h-[550px]"
+       - Mobile Screens (<768px):  "h-[200px] sm:h-[280px]" (Taake text mota aur saaf parha jaye)
+       - Laptop & Desktop (md+):   "md:aspect-[1920/750] md:h-auto" (Exact 100% Proportions)
+       
+       Nateeja: 0% Crop + 0% Khali Jagah + Har Screen Par Perfectly Natural!
        ========================================================================= */
-    <section className="relative w-full h-[280px] sm:h-[380px] md:h-[480px] lg:h-[580px] xl:h-[620px] bg-slate-900 border-b border-slate-200 overflow-hidden select-none">
+    <section className="relative w-full h-[210px] sm:h-[280px] md:h-auto md:aspect-[1920/750] bg-slate-900 border-b border-slate-200 overflow-hidden select-none">
       
       {/* Slides Container */}
       {heroSlidesData.map((slide, index) => (
@@ -45,9 +44,9 @@ export default function HeroSlider() {
             index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
           }`}
         >
-          {/* 🎯 Full Width Natural Container */}
+          {/* 🎯 Non-Clickable Container (404 Error se bilkul safe) */}
           <div className="relative w-full h-full">
-            {/* 🎯 object-cover: No distortion (chehre natural rahenge), aur width 100% screen cover karegi */}
+            {/* 🎯 Object-cover with exact aspect ratio: 100% Full Width & Zero Distortion */}
             <Image
               src={slide.image}
               alt={slide.title || "PIASS College Admissions Open"}
@@ -59,12 +58,12 @@ export default function HeroSlider() {
         </div>
       ))}
 
-      {/* Navigation Arrows: Glassmorphic Sleek Buttons */}
+      {/* Navigation Arrows: Screen ke bilkul kinaron par stylish buttons */}
       <button
         onClick={prevSlide}
         type="button"
         aria-label="Previous Slide"
-        className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-30 w-8 h-8 sm:w-11 sm:h-11 rounded-full bg-white/80 hover:bg-white text-slate-800 border border-slate-200/80 shadow-lg flex items-center justify-center transition-all cursor-pointer active:scale-95"
+        className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-30 w-8 h-8 sm:w-11 sm:h-11 rounded-full bg-white/80 hover:bg-white text-slate-800 border border-slate-200/80 shadow-md flex items-center justify-center transition-all cursor-pointer active:scale-95"
       >
         <ChevronLeft className="w-4 h-4 sm:w-6 sm:h-6 text-slate-700" />
       </button>
@@ -73,7 +72,7 @@ export default function HeroSlider() {
         onClick={nextSlide}
         type="button"
         aria-label="Next Slide"
-        className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-30 w-8 h-8 sm:w-11 sm:h-11 rounded-full bg-white/80 hover:bg-white text-slate-800 border border-slate-200/80 shadow-lg flex items-center justify-center transition-all cursor-pointer active:scale-95"
+        className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-30 w-8 h-8 sm:w-11 sm:h-11 rounded-full bg-white/80 hover:bg-white text-slate-800 border border-slate-200/80 shadow-md flex items-center justify-center transition-all cursor-pointer active:scale-95"
       >
         <ChevronRight className="w-4 h-4 sm:w-6 sm:h-6 text-slate-700" />
       </button>
@@ -86,8 +85,8 @@ export default function HeroSlider() {
         />
       </div>
 
-      {/* Dots Indicator: Neat & Compact at Bottom */}
-      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-30 flex items-center gap-1.5">
+      {/* Dots Indicator: Bilkul neechay compact size mein */}
+      <div className="absolute bottom-2.5 sm:bottom-3 left-1/2 -translate-x-1/2 z-30 flex items-center gap-1.5">
         {heroSlidesData.map((_, i) => (
           <button
             key={i}

@@ -27,7 +27,7 @@ import {
 import HeroSlider from "@/components/home/HeroSlider";
 import AffiliationsStrip from "@/components/home/AffiliationsStrip";
 import { collegeInfo } from "@/data/affiliationsData";
-
+import WelcomeVideoSection from "@/components/home/WelcomeVideoSection";
 export default function HomePage() {
   const [openFaq, setOpenFaq] = useState(0);
 
@@ -163,7 +163,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
+<WelcomeVideoSection />
       {/* 4. EXECUTIVE DIRECTOR & PRINCIPAL COMMITMENT SPOTLIGHT */}
       <section className="py-20 sm:py-24 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
