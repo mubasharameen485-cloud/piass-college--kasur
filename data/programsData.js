@@ -1,7 +1,7 @@
 export const programsData = [
   // ================= NURSING DEGREE PROGRAMS =================
 
-// 🎯 DPT (Allied Health Sciences)
+// DPT (Allied Health Sciences)
   {
     slug: "dpt",
     id: "dpt",

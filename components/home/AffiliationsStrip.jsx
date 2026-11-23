@@ -113,4 +113,4 @@ export default function AffiliationsStrip() {
 
     </section>
   );
-}g
+}

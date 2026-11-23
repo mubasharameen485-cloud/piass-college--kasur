@@ -104,7 +104,7 @@ export default async function ProgramDetailPage({ params }) {
                 />
               </div>
 
-              {/* 🎯 Interactive Tabs Component */}
+              {/*  Interactive Tabs Component */}
               <ProgramDetailTabs program={program} />
             </div>
 

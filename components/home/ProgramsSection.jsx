@@ -5,13 +5,15 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import ProgramCard from "@/components/ui/ProgramCard";
 import { programsData } from "@/data/programsData";
 
-const categories = [
-  { key: "all", label: "All Disciplines (13)" },
-  { key: "Nursing Degree", label: "Nursing Degrees" },
-  { key: "Diploma Programs", label: "Health Diplomas" },
-  { key: "BS Programs", label: "BS Programs (4 Yrs)" },
-  { key: "ADP Programs", label: "ADP Fast-Track (2 Yrs)" },
-];
+// Image 1 ke mutabiq exact categories
+  const categories = [
+    { id: "all", label: `All Disciplines (${programsData.length})` },
+    { id: "nursing-ahs", label: "Nursing & AHS" },
+    { id: "diplomas", label: "Nursing Diplomas" },
+    { id: "bs-programs", label: "BS Programs (4 Yrs)" },
+    { id: "adp", label: "ADP Programs (2 Yrs)" },
+    { id: "post-adp", label: "Post ADP Programs" },
+  ];
 
 export default function ProgramsSection() {
   const [activeTab, setActiveTab] = useState("all");

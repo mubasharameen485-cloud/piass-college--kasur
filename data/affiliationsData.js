@@ -40,7 +40,7 @@ export const collegeInfo = {
   name: "PIASS College of Nursing & Sciences",
   campus: "Kasur Campus",
   address: "Main Ferozpur Road, Opposite New Bus Terminal, Kasur, Punjab, Pakistan",
-  phoneNumbers: ["+92 304 1448481", "+92 307, 1448484"],
+  phoneNumbers: ["+92 304 1448481", "+92 307 1448484"],
   email: "info@piass.edu.pk",
   admissionsYear: "2026",
   mainLogo: "/logos/piass-logo.jpeg"
